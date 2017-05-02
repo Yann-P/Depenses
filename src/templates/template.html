@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<header>
+
+	    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+	        <a class="pure-menu-heading" href="">DEPENSES</a>
+
+	        <ul class="pure-menu-list">
+	            
+	            {% if g.user %}
+	            	<li class="pure-menu-item pure-menu-selected">
+	            		<a href="{{ url_for('user.index') }}" class="pure-menu-link">Dashboard</a>
+	            	</li>
+	     
+	            	<li class="pure-menu-item">
+	            		
+	            		<a href="{{ url_for('user.logout') }}" class="pure-menu-link"> Logout ({{ g.user.name }}) </a>
+	            	</li>
+
+				{% else %}
+					<li class="pure-menu-item"><a href="{{ url_for('user.login') }}" class="pure-menu-link">Log In</a></li>
+				{% endif %}
+	            
+	        </ul>
+	    </div>
+	</header>
+	<div class="content">
+		{% block body %}{% endblock %}
+	</div>
+</body>
+</html>

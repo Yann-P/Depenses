@@ -1,0 +1,47 @@
+.content {
+	max-width: 800px;
+	margin: 0 auto;
+	margin-top:70px;
+}
+
+body {
+	font-family: Source Sans Pro, arial, sans-serif;
+	font-size: 1.2em;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+.error {
+	color: red;
+}
+
+.home-menu {
+	background: #577;
+	padding: 5px;
+}
+
+.home-menu .pure-menu-heading {
+    color: white;
+}
+
+
+.pure-menu-selected .pure-menu-link, .pure-menu-selected .pure-menu-link:visited {
+	color: white;
+}
+
+.home-menu a {
+    color: white;
+}
+.home-menu li a:hover,
+.home-menu li a:focus,
+.home-menu li a:visited {
+    background: none;
+    border: none;
+    color: white;
+}
+
+.home-menu ul {
+    float: right;
+}

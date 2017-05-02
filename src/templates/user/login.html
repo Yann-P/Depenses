@@ -1,1 +1,50 @@
-<h2>Sign In</h2>
+{% extends "template.html" %}
+
+{% block body %}
+
+<h1>Sign in</h1>
+<form class="pure-form pure-form-aligned" action="?" method="post">
+
+	<div class="pure-control-group">
+		<label>
+			{% if step2 %}
+				{% if newuser %}
+					Sign up
+				{% else %}
+					Log in
+				{% endif %}
+			{% else %}
+				Log in or create account
+			{% endif %}
+		</label>
+		<input {% if not step2 %}autofocus{% endif %} 
+			type="text" 
+			value="{% if step2 %}{{ name }}{% endif %}"
+			name="name" 
+			placeholder="Login">
+	</div>
+
+	{% if step2 %}
+	<div class="pure-control-group">
+		<label>
+			{% if newuser %}
+				<b>Choose</b> a password
+			{% else %}
+				<b>Enter your password</b> 
+				{% if error %}
+					<div class='error'>Wrong, try again</div>
+				{% endif %}
+			{% endif %}
+		</label>
+		<input {% if step2 %}autofocus{% endif %} type="password" name="password" placeholder="Password">
+	</div>
+	{% endif %}
+
+
+	<div class="pure-control-group">
+		<label></label>
+		<input type="submit" value="Next &rarr;" class="pure-button pure-button-primary">
+	</div>
+</form>
+
+{% endblock %}
