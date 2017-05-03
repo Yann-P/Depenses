@@ -2,12 +2,7 @@
 
 {% block body %}
 <h1>Groupe "{{ team.name }}"</h1>
-<p>{{ team.description }}</p>
-<ul>
-	{% for user in team.get_users() %}
-		<li>{{ user.name }}</li>
-	{% endfor %}
-</ul>
+
 
 <h2>Nouvelle dépense en commun</h2>
 <form class="pure-form pure-form-stacked" method="post" action="{{ url_for('dashboard.add_expenditure', tid=team.id) }}">
@@ -45,6 +40,8 @@
 	</div>
 </form>
 
+<br>
+
 <h2>Dépenses</h2>
 <table class="pure-table">
 	<thead>
@@ -71,6 +68,8 @@
 
 </table>
 
+<br>
+
 <h2>Comptes</h2>
 <table class="pure-table">
 	<thead>
@@ -95,7 +94,24 @@
 
 </table>
 
-	
+<br>
 
+<h2>À propos du groupe</h2>
+<b>Description :</b> {{ team.description }}<br>
+<b>Membres :</b>
+<ul>
+	{% for user in team.get_users() %}
+		<li>{{ user.name }}</li>
+	{% endfor %}
+</ul>
+
+<form class="pure-form" method="post" action="{{ url_for('dashboard.add_user', tid=team.id) }}">
+    <fieldset>
+        <legend>Ajouter au groupe</legend>
+
+        <input type="text" name="user_name" placeholder="Nom">
+        <button type="submit" class="pure-button pure-button-primary">&rarr;</button>
+    </fieldset>
+</form>
 
 {% endblock %}

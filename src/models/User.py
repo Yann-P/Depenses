@@ -37,6 +37,13 @@ class User:
 		return User(res['id'], res['name'], res['password'])
 
 	@staticmethod
+	def from_name(name):
+		res = query_fetch_one("SELECT id, name, password FROM user WHERE name=%s", (name,))
+		if res is None:
+			return None
+		return User(res['id'], res['name'], res['password'])
+
+	@staticmethod
 	def login(name, password):
 		sql = "SELECT id, password FROM user WHERE name=%s";
 		cur = cursor()

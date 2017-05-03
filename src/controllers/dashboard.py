@@ -42,6 +42,16 @@ def add_expenditure(tid):
 		Expenditure.insert(team_id=tid, user_id=who_paid, amount=amount, title=title, comment=comment)
 	return redirect(url_for('dashboard.team', tid=tid))
 
+@dashboard.route('/team/<int:tid>/add_user', methods=['post'])
+@require_user
+def add_user(tid):
+	user_name 	= request.form.get('user_name')
+	user = User.from_name(user_name)
+	if user:
+		Team.from_id(tid).add_user(user.id)
+	return redirect(url_for('dashboard.team', tid=tid))
+
+
 
 @dashboard.route('/teams/add_team', methods=['post'])
 @require_user
