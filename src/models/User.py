@@ -20,6 +20,14 @@ class User:
 			ret.append(Team.from_id(row['tid']))
 		return ret
 
+	def get_total_spent_in_team(self, tid):
+		sql = """SELECT SUM(amount) AS "sum"
+				 FROM expenditure
+				 WHERE user_id=%s 
+				 AND team_id=%s"""
+		res = query_fetch_one(sql, (int(self.id), int(tid)))
+		return res['sum'] or 0
+
 
 	@staticmethod
 	def from_id(id):
@@ -50,7 +58,7 @@ class User:
 		cur.execute(sql, (name, hashed_password))
 		uid = cur.lastrowid
 		cur.close()
-		return uid
+		return User.from_id(uid)
 
 	@staticmethod
 	def exists(name):

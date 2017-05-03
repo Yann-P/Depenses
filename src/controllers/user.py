@@ -54,6 +54,6 @@ def handle_login(name, password):
 
 def handle_signup(name, password):
     print('spam')
-    uid = User.insert(name, password)
-    session['uid'] = uid
+    user = User.insert(name, password)
+    session['uid'] = user.id
     return redirect(url_for('dashboard.index'))

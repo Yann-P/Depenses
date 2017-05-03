@@ -9,7 +9,7 @@
 	{% endfor %}
 </ul>
 
-<h2>Nouvelle dépense</h2>
+<h2>Nouvelle dépense en commun</h2>
 <form class="pure-form pure-form-stacked" method="post" action="{{ url_for('dashboard.add_expenditure', tid=team.id) }}">
 
 	<div class="pure-g">
@@ -42,11 +42,7 @@
 			<label>&nbsp;</label>
 			<input type="submit" value="Ajouter" class="pure-button pure-button-primary">
 		</div>
-
 	</div>
-
-
-
 </form>
 
 <h2>Dépenses</h2>
@@ -63,7 +59,7 @@
 
 	{% for expenditure in team_expenditures %}
 
-		<tr>
+		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
 			<td>{{ expenditure.date }}</td>
 			<td>{{ expenditure.get_user().name }}</td>
 			<td>{{ expenditure.title }}</td>
@@ -74,5 +70,32 @@
 	{% endfor %}
 
 </table>
+
+<h2>Comptes</h2>
+<table class="pure-table">
+	<thead>
+		<tr>
+			<th>Total payé par</th>
+			<th>Montant</th>
+		</tr>
+	</thead>
+
+	{% for user in team.get_users() %}
+
+		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
+			<td>{{ user.name }}</td>
+			<td>{{ user.get_total_spent_in_team(team.id) }} €</td>
+		</tr>
+
+	{% endfor %}
+
+	<tr>
+		<td colspan="2"><b>Total dépenses groupe : {{ team.get_total_spent() }} €</b></td>
+	</tr>
+
+</table>
+
+	
+
 
 {% endblock %}
