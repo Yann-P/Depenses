@@ -1,0 +1,36 @@
+{% extends "template.html" %}
+
+{% block body %}
+<h1>Groupes</h1>
+
+<h2>Mes groupes</h2>
+<table class="pure-table">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Description</th>
+			<th>Membres</th>
+			<th></th>
+		</tr>
+	</thead>
+
+	{% for team in own_teams %}
+
+		<tr>
+			<td>{{ team.name }}</td>
+			<td>{{ team.description }}</td>
+			<td>
+				{% for user in team.get_users() %}
+					{{ user.name }}<br>
+				{% endfor %}
+			</td>
+			<td>
+				<a href="team/{{ team.id }}">Voir &rarr;</a>
+			</td>
+		</tr>
+
+	{% endfor %}
+
+</table>
+
+{% endblock %}

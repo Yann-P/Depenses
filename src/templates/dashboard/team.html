@@ -1,0 +1,56 @@
+{% extends "template.html" %}
+
+{% block body %}
+<h1>Groupe {{ team.name }}</h1>
+<h3>Membres du groupe</h3>
+<h3>Description du groupe</h3>
+<p>
+	{{ team.description }}
+</p>
+<hr>
+<h3>Dépenses</h3>
+
+<h2>Nouvelle dépense</h2>
+<form class="pure-form pure-form-aligned" action="add_expenditure" method="post">
+	<div class="pure-control-group">
+		<label>Intitulé</label>
+		<input type="text" name="title" placeholder="ex. courses Carrefour">
+	</div>
+	<div class="pure-control-group">
+		<label>Montant</label>
+		<input type="number" name="amount">
+	</div>
+	<div class="pure-control-group">
+		<label>Qui a payé ?</label>
+		<select name="who_paid"></select>
+	</div>
+	<div class="pure-control-group">
+		<label></label>
+		<input type="submit" value="Ajouter">
+	</div>
+</form>
+
+<table class="pure-table">
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Intitulé</th>
+			<th>Montant</th>
+			<th>Commentaire</th>
+		</tr>
+	</thead>
+
+	{% for expenditure in team.get_expenditures() %}
+
+		<tr>
+			<td>{{ expenditure.date }}</td>
+			<td>{{ expenditure.title }}</td>
+			<td>{{ expenditure.amount }}</td>
+			<td>{{ expenditure.comment }}</td>
+		</tr>
+
+	{% endfor %}
+
+</table>
+
+{% endblock %}

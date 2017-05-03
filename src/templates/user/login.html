@@ -9,12 +9,12 @@
 		<label>
 			{% if step2 %}
 				{% if newuser %}
-					Sign up
+					Inscription
 				{% else %}
-					Log in
+					Connexion
 				{% endif %}
 			{% else %}
-				Log in or create account
+				Connexion ou créer un compte
 			{% endif %}
 		</label>
 		<input {% if not step2 %}autofocus{% endif %} 
@@ -28,11 +28,11 @@
 	<div class="pure-control-group">
 		<label>
 			{% if newuser %}
-				<b>Choose</b> a password
+				<b>Choisissez</b> un mot de passe
 			{% else %}
-				<b>Enter your password</b> 
+				<b>Entrez votre mot de passe</b> 
 				{% if error %}
-					<div class='error'>Wrong, try again</div>
+					<div class='error'>Erreur, essayez à nouveau</div>
 				{% endif %}
 			{% endif %}
 		</label>
@@ -43,7 +43,7 @@
 
 	<div class="pure-control-group">
 		<label></label>
-		<input type="submit" value="Next &rarr;" class="pure-button pure-button-primary">
+		<input type="submit" value="Suivant &rarr;" class="pure-button pure-button-primary">
 	</div>
 </form>
 

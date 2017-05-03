@@ -1,7 +1,30 @@
 {% extends "template.html" %}
 
 {% block body %}
-<h1>Dashboard</h1>
+<h1>Tableau de bord</h1>
 
+<h2>Mes dépenses</h2>
+<table class="pure-table">
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Title</th>
+			<th>Amount</th>
+			<th>Comment</th>
+		</tr>
+	</thead>
+
+	{% for e in own_expenditures %}
+
+		<tr>
+			<td>{{ e.date }}</td>
+			<td>{{ e.title }}</td>
+			<td>{{ e.amount }}</td>
+			<td>{{ e.comment }}</td>
+		</tr>
+
+	{% endfor %}
+
+</table>
 
 {% endblock %}

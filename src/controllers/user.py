@@ -21,7 +21,7 @@ def login():
 @user.route('/logout', methods=['GET'])
 def logout():
     session['uid'] = None
-    return redirect(url_for('user.index'))
+    return redirect(url_for('dashboard.index'))
  
 @user.route('/login', methods=['POST'])
 def login_form():
@@ -48,7 +48,7 @@ def handle_login(name, password):
     uid = User.login(name, password)
     if uid != -1: # login successful
         session['uid'] = uid
-        return redirect(url_for('user.index'))
+        return redirect(url_for('dashboard.index'))
     else:
         return render_template('user/login.html', step2=True, newuser=False, name=name, error=True)
 
@@ -56,4 +56,4 @@ def handle_signup(name, password):
     print('spam')
     uid = User.insert(name, password)
     session['uid'] = uid
-    return redirect(url_for('user.index'))
+    return redirect(url_for('dashboard.index'))
