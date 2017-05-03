@@ -10,22 +10,18 @@
 			<th>Nom</th>
 			<th>Description</th>
 			<th>Membres</th>
-			<th></th>
 		</tr>
 	</thead>
 
 	{% for team in own_teams %}
 
 		<tr>
-			<td>{{ team.name }}</td>
+			<td><a href="team/{{ team.id }}"><b>{{ team.name }}</b></a></td>
 			<td>{{ team.description }}</td>
 			<td>
 				{% for user in team.get_users() %}
 					{{ user.name }}<br>
 				{% endfor %}
-			</td>
-			<td>
-				<a href="team/{{ team.id }}">Voir &rarr;</a>
 			</td>
 		</tr>
 

@@ -21,7 +21,7 @@ def login():
 @user.route('/logout', methods=['GET'])
 def logout():
     session['uid'] = None
-    return redirect(url_for('dashboard.index'))
+    return redirect(url_for('user.login'))
  
 @user.route('/login', methods=['POST'])
 def login_form():

@@ -1,5 +1,4 @@
 from models.db import *
-from models.Expenditure import Expenditure
 from models.Team import *
 from werkzeug import check_password_hash, generate_password_hash
 
@@ -10,15 +9,6 @@ class User:
 		self.name = name
 		self.password_hash = password_hash
 
-	def get_expenditures(self):
-		sql = """SELECT id, user_id, amount, date, title, comment, team_id
-				 FROM expenditure 
-				 WHERE user_id=%s"""
-		res = query_fetch_all(sql, (self.id,))
-		ret = []
-		for row in res:
-			ret.append(Expenditure(row['id'], row['user_id'], row['amount'], row['date'], row['title'], row['comment'], row['team_id']))
-		return ret
 
 	def get_teams(self):
 		ret = []

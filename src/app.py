@@ -24,7 +24,7 @@ app.secret_key = 'd1\x01O<!\xd5\xa2\xa0\x9fR"'
 @app.before_request
 def before_request():
     g.user = None
-    if 'uid' in session:
+    if 'uid' in session and session['uid']:
         g.user = User.from_id(session['uid'])
 
 
