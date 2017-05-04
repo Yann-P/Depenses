@@ -6,6 +6,7 @@ from models.db import *
 from models.Team import Team
 from models.User import User
 from models.Expenditure import Expenditure
+from models.Reimbursement import Reimbursement
 
 from utils.middleware import *
 import sys
@@ -33,7 +34,10 @@ def view(tid):
 	team = Team.from_id(tid)
 	if not team:
 		abort(404)
-	return render_template('dashboard/team.html', team=team, team_expenditures=Expenditure.get_for_team(tid))
+	return render_template('dashboard/team.html', 
+		team=team, 
+		team_expenditures=Expenditure.get_for_team(tid),
+		team_reimbursements=Reimbursement.get_for_team(tid))
 
 
 @team.route('/<int:tid>/add_expenditure', methods=['post'])
@@ -46,6 +50,18 @@ def add_expenditure(tid):
 	comment 	= request.form.get('comment')
 	if amount > 0 and title:
 		Expenditure.insert(team_id=tid, user_id=who_paid, amount=amount, title=title, comment=comment)
+	return redirect(url_for('team.view', tid=tid))
+
+@team.route('/<int:tid>/add_reimbursement', methods=['post'])
+@require_user
+@current_user_belongs_to_team
+def add_reimbursement(tid):
+	sender 		= request.form.get('sender')
+	recipient 	= request.form.get('recipient')
+	amount 		= float(request.form.get('amount') or 0)
+	comment 	= request.form.get('comment')
+	if amount > 0 and sender != recipient:
+		Reimbursement.insert(from_user=sender, to_user=recipient, amount=amount, comment=comment, team_id=tid)
 	return redirect(url_for('team.view', tid=tid))
 
 

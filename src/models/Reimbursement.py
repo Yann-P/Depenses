@@ -23,6 +23,31 @@ class Reimbursement:
 	def get_team(self):
 		return Team.from_id(self.team_id)
 
+	@staticmethod
+	def get_for_user(uid):
+		sql = """SELECT id, from_user, to_user, amount, comment, date, team_id
+				 FROM reimbursement 
+				 WHERE from_user=%s 
+				 OR to_user=%s
+				 ORDER BY date DESC"""
+		res = query_fetch_all(sql, (int(uid), int(uid)))
+		ret = []
+		for row in res:
+			ret.append(Reimbursement.build(row))
+		return ret
+
+	@staticmethod
+	def get_for_team(tid):
+		sql = """SELECT id, from_user, to_user, amount, comment, date, team_id
+				 FROM reimbursement 
+				 WHERE team_id=%s
+				 ORDER BY date DESC"""
+		res = query_fetch_all(sql, (int(tid),))
+		ret = []
+		for row in res:
+			ret.append(Reimbursement.build(row))
+		return ret
+
 
 	@staticmethod
 	def insert(from_user, to_user, amount, comment, team_id, date=None):

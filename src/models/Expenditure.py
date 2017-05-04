@@ -37,7 +37,8 @@ class Expenditure:
 	def get_for_user(uid):
 		sql = """SELECT id, user_id, amount, date, title, comment, team_id
 				 FROM expenditure 
-				 WHERE user_id=%s"""
+				 WHERE user_id=%s
+				 ORDER BY date DESC"""
 		res = query_fetch_all(sql, (uid,))
 		ret = []
 		for row in res:

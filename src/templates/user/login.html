@@ -21,6 +21,7 @@
 			type="text" 
 			value="{% if step2 %}{{ name }}{% endif %}"
 			name="name" 
+			required
 			placeholder="Login">
 	</div>
 
@@ -36,7 +37,7 @@
 				{% endif %}
 			{% endif %}
 		</label>
-		<input {% if step2 %}autofocus{% endif %} type="password" name="password" placeholder="Password">
+		<input {% if step2 %}autofocus{% endif %} type="password" name="password" placeholder="Password" required>
 	</div>
 	{% endif %}
 
