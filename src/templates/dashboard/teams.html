@@ -15,8 +15,8 @@
 
 	{% for team in own_teams %}
 
-		<tr>
-			<td><a href="team/{{ team.id }}"><b>{{ team.name }}</b></a></td>
+		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
+			<td><a href="{{ team.id }}"><b>{{ team.name }}</b></a></td>
 			<td>{{ team.description }}</td>
 			<td>
 				{% for user in team.get_users() %}
@@ -29,13 +29,14 @@
 
 </table>
 
+<br>
 
 <h2>Créer un nouveau groupe</h2>
 <p>Vous serez automatiquement ajouté au groupe. Vous pourrez ensuite ajouter des utilisateurs.</p>
 {% if error_team_exists %}
 	<div class="error"><b>Erreur</b>, un groupe avec ce nom existe déjà</div>
 {% endif %}
-<form class="pure-form pure-form-aligned" action="{{ url_for('dashboard.add_team') }}" method="post">
+<form class="pure-form pure-form-aligned" action="{{ url_for('team.add') }}" method="post">
 
 	<div class="pure-control-group">
 		<label>Nom du groupe</label>

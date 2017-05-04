@@ -20,7 +20,8 @@ class Expenditure:
 	def get_for_team(tid):
 		sql = """SELECT id, user_id, amount, date, title, comment, team_id
 				 FROM expenditure 
-				 WHERE team_id=%s"""
+				 WHERE team_id=%s
+				 ORDER BY date DESC"""
 		res = query_fetch_all(sql, (int(tid),))
 		ret = []
 		for row in res:

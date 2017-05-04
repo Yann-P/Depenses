@@ -12,13 +12,13 @@ from datetime import datetime
 from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g
 from controllers.user import user
-from controllers.dashboard import dashboard
+from controllers.team import team
 from models.User import User
 
 
 app = Flask('depenses')
 app.register_blueprint(user, url_prefix='/user')
-app.register_blueprint(dashboard, url_prefix='/dashboard')
+app.register_blueprint(team, url_prefix='/team')
 app.secret_key = 'd1\x01O<!\xd5\xa2\xa0\x9fR"'
 
 @app.before_request

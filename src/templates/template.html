@@ -7,23 +7,24 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pure-min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/grids-responsive-min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 	<header>
 
 		<div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-			<a class="pure-menu-heading" href="{{ url_for('dashboard.index') }}">DEPENSES</a>
+			<a class="pure-menu-heading" href="{{ url_for('index') }}">DEPENSES</a>
 
 			<ul class="pure-menu-list">
 				
 				{% if g.user %}
 					<li class="pure-menu-item pure-menu-selected">
-						<a href="{{ url_for('dashboard.index') }}" class="pure-menu-link">Dépenses</a>
+						<a href="{{ url_for('team.index') }}" class="pure-menu-link">Dépenses</a>
 					</li>
 
 					<li class="pure-menu-item pure-menu-selected">
-						<a href="{{ url_for('dashboard.teams') }}" class="pure-menu-link">Groupes</a>
+						<a href="{{ url_for('team.list') }}" class="pure-menu-link">Groupes</a>
 					</li>
 		 
 					<li class="pure-menu-item">
@@ -38,6 +39,8 @@
 			</ul>
 		</div>
 	</header>
+	{% block body_fullwidth %}{% endblock %}
+
 	<div class="content">
 		{% block body %}{% endblock %}
 	</div>
