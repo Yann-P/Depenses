@@ -51,6 +51,13 @@ class Team:
 		cur = query(sql, (int(uid), int(self.id)))
 		cur.close()
 
+	def remove_user(self, uid):
+		sql = """DELETE FROM users_by_teams 
+				 WHERE user_id=%s
+				 AND team_id=%s"""
+		cur = query(sql, (int(uid), int(self.id)))
+		cur.close()
+
 	def contains_user(self, uid):
 		sql = "SELECT id FROM users_by_teams WHERE team_id=%s AND user_id=%s";
 		cur = cursor()
@@ -75,6 +82,8 @@ class Team:
 	def from_id(id):
 		sql = "SELECT id, name, description FROM team WHERE id=%s"
 		res = query_fetch_one(sql, (int(id),))
+		if res is None:
+			return None
 		return Team(res['id'], res['name'], res['description'])
 
 	@staticmethod

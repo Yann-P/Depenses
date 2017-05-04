@@ -51,6 +51,7 @@
 			<th>Intitulé</th>
 			<th>Montant</th>
 			<th>Commentaire</th>
+			<th></th>
 		</tr>
 	</thead>
 
@@ -62,6 +63,12 @@
 			<td>{{ expenditure.title }}</td>
 			<td>{{ expenditure.amount }}</td>
 			<td>{{ expenditure.comment }}</td>
+			<td>
+				<form action="{{ url_for('team.remove_expenditure', tid=team.id) }}" method="post">
+					<input type="hidden" name="eid" value="{{ expenditure.id }}">
+					<button type="submit" class="button-error pure-button">&times;</button>
+				</form>
+			</td>
 		</tr>
 
 	{% endfor %}
@@ -72,7 +79,7 @@
 
 <h2>Comptes</h2>
 
-<table class="pure-table">
+<table class="pure-table pure-table-bordered">
 	<thead>
 		<tr>
 			<th>Total payé par</th>
@@ -84,19 +91,20 @@
 
 		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
 			<td>{{ user.name }}</td>
-			<td>{{ user.get_total_spent_in_team(team.id) }} €</td>
+			<td>{{ user.get_total_spent_in_team(team.id) | round(2)}} €</td>
 		</tr>
 
 	{% endfor %}
 
 	<tr>
-		<td colspan="2" style="text-align: right"><b>Total dépenses groupe : {{ team.get_total_spent() }} €</b></td>
+		<td colspan="2" style="text-align: right"><b>Total dépenses groupe : {{ team.get_total_spent() | round(2) }} €</b></td>
 	</tr>
 	<tr>
-		<td colspan="2" style="text-align: right"><b>Dépense moyenne par personne : {{ team.get_avg_spent() }} €</b></td>
+		<td colspan="2" style="text-align: right"><b>Dépense moyenne par personne : {{ team.get_avg_spent() | round(2) }} €</b></td>
 	</tr>
 
 </table>
+
 
 <h2>Régularisations</h2>
 <table class="pure-table">
@@ -108,7 +116,7 @@
 	
 	{% for transaction in team.get_money_distribution() %}
 		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-			<td><b>{{ transaction.from }}</b> doit <b>{{ transaction.amount }}</b>€ à <b>{{ transaction.to }}</b></td> 
+			<td><b>{{ transaction.from }}</b> doit <b>{{ transaction.amount | round(2) }}</b> € à <b>{{ transaction.to }}</b></td> 
 		</tr> 
 	{% endfor %}
 </table>
@@ -119,21 +127,25 @@
 <br>
 
 <h2>À propos du groupe</h2>
-<b>Description :</b> {{ team.description }}<br>
-<b>Membres :</b>
-<ul>
+<ul class="users">
+	{% if error_cant_remove_user %}
+		<div class="error"><b>Erreur</b>, vous ne pouvez pas retirer le dernier utilisateur, <u>ni</u> un utilisateur ayant des dépenses dans le groupe</div>
+	{% endif %}
+
 	{% for user in team.get_users() %}
-		<li>{{ user.name }}</li>
+		<li><div class="user">{{ user.name }} <a href="{{ url_for('team.remove_user', tid=team.id, uid=user.id)}}" class="delete-user" onclick="return confirm('Supprimer cet utilisateur du groupe ?')">&times;</a></div> </li>
 	{% endfor %}
+
+		
+
 </ul>
-
 <form class="pure-form" method="post" action="{{ url_for('team.add_user', tid=team.id) }}">
-    <fieldset>
-        <legend>Ajouter au groupe</legend>
-
-        <input type="text" name="user_name" placeholder="Nom">
-        <button type="submit" class="pure-button pure-button-primary">+</button>
-    </fieldset>
+	<input type="text" name="user_name" placeholder="Nom">
+	<button type="submit" class="pure-button pure-button-primary">+</button>
 </form>
+{{ team.description }}<br>
+
+
+
 
 {% endblock %}

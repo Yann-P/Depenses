@@ -13,6 +13,7 @@ import sys
 
 team = Blueprint('team', __name__, template_folder='templates')
 
+
 @team.route('/', methods=["get"])
 @require_user
 def index():
@@ -29,7 +30,10 @@ def list():
 @require_user
 @current_user_belongs_to_team
 def view(tid):
-	return render_template('dashboard/team.html', team=Team.from_id(tid), team_expenditures=Expenditure.get_for_team(tid))
+	team = Team.from_id(tid)
+	if not team:
+		abort(404)
+	return render_template('dashboard/team.html', team=team, team_expenditures=Expenditure.get_for_team(tid))
 
 
 @team.route('/<int:tid>/add_expenditure', methods=['post'])
@@ -37,12 +41,24 @@ def view(tid):
 @current_user_belongs_to_team
 def add_expenditure(tid):
 	who_paid 	= request.form.get('who_paid')
-	amount 		= float(request.form.get('amount'))
+	amount 		= float(request.form.get('amount') or 0)
 	title 		= request.form.get('title')
 	comment 	= request.form.get('comment')
-	if amount > 0:
+	if amount > 0 and title:
 		Expenditure.insert(team_id=tid, user_id=who_paid, amount=amount, title=title, comment=comment)
 	return redirect(url_for('team.view', tid=tid))
+
+
+@team.route('/<int:tid>/remove_expenditure', methods=['post'])
+@require_user
+@current_user_belongs_to_team
+def remove_expenditure(tid):
+	eid = request.form.get('eid')
+	expenditure = Expenditure.from_id(eid)
+	if expenditure and expenditure.team_id == tid:
+		Expenditure.remove(eid)
+	return redirect(url_for('team.view', tid=tid))
+
 
 @team.route('/<int:tid>/add_user', methods=['post'])
 @require_user
@@ -54,6 +70,17 @@ def add_user(tid):
 		Team.from_id(tid).add_user(user.id)
 	return redirect(url_for('team.view', tid=tid))
 
+
+@team.route('/<int:tid>/remove_user/<int:uid>', methods=['get'])
+@require_user
+@current_user_belongs_to_team
+def remove_user(tid, uid):
+	team = Team.from_id(tid)
+	users = team.get_users()
+	if len(users) > 1:
+		team.remove_user(uid)
+		return redirect(url_for('team.view', tid=tid))
+	return redirect(url_for('team.view', tid=tid))
 
 
 @team.route('/add', methods=['post'])

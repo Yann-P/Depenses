@@ -3,20 +3,22 @@
 {% block body %}
 <h1>Tableau de bord</h1>
 
-<h2>Mes dépenses</h2>
-<table class="pure-table">
+<h2>Mes dépenses (tous groupes confondus)</h2>
+<table class="pure-table pure-table-bordered">
 	<thead>
 		<tr>
+			<th>Groupe</th>
 			<th>Date</th>
-			<th>Title</th>
-			<th>Amount</th>
-			<th>Comment</th>
+			<th>Intitulé</th>
+			<th>Montant</th>
+			<th>Commentaire</th>
 		</tr>
 	</thead>
 
 	{% for e in own_expenditures %}
 
-		<tr>
+		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
+			<td>{{ e.get_team().name }}</td>
 			<td>{{ e.date }}</td>
 			<td>{{ e.title }}</td>
 			<td>{{ e.amount }}</td>

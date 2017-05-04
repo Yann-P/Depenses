@@ -32,7 +32,7 @@ def get_money_distribution(expenditures):
 	avg = total / n
 	due = [[0] * n for i in range(n)]
 
-	while True:
+	for i in range(100):
 		deltas = _get_deltas(expenditures, n, avg)
 
 		if(deltas.count(0) >= n - 1):

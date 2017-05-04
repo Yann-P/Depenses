@@ -14,7 +14,9 @@
 	<header>
 
 		<div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-			<a class="pure-menu-heading" href="{{ url_for('index') }}">DEPENSES</a>
+			<a class="pure-menu-heading" href="{{ url_for('index') }}">
+				{% if g.user %}{{ g.user.name }}{% else %}DEPENSES{% endif %}
+			</a>
 
 			<ul class="pure-menu-list">
 				
@@ -29,7 +31,7 @@
 		 
 					<li class="pure-menu-item">
 						
-						<a href="{{ url_for('user.logout') }}" class="pure-menu-link"> &rarr;[] ({{ g.user.name }}) </a>
+						<a href="{{ url_for('user.logout') }}" class="pure-menu-link"> <b>&rarr;</b>[]</a>
 					</li>
 
 				{% else %}
