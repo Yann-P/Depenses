@@ -27,12 +27,14 @@ def list():
 
 @team.route('/<int:tid>', methods=['get'])
 @require_user
+@current_user_belongs_to_team
 def view(tid):
 	return render_template('dashboard/team.html', team=Team.from_id(tid), team_expenditures=Expenditure.get_for_team(tid))
 
 
 @team.route('/<int:tid>/add_expenditure', methods=['post'])
 @require_user
+@current_user_belongs_to_team
 def add_expenditure(tid):
 	who_paid 	= request.form.get('who_paid')
 	amount 		= float(request.form.get('amount'))
@@ -44,6 +46,7 @@ def add_expenditure(tid):
 
 @team.route('/<int:tid>/add_user', methods=['post'])
 @require_user
+@current_user_belongs_to_team
 def add_user(tid):
 	user_name 	= request.form.get('user_name')
 	user = User.from_name(user_name)
@@ -59,8 +62,8 @@ def add():
 	name 		= request.form.get('name')
 	description = request.form.get('description')
 	if(Team.exists(name)):
-		return redirect(url_for('team.views'), error_team_exists=True)
+		return redirect(url_for('team.list'), error_team_exists=True)
 
 	team = Team.insert(name=name, description=description)
 	team.add_user(g.user.id)
-	return redirect(url_for('team.views'))
+	return redirect(url_for('team.list'))

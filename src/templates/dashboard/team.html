@@ -71,6 +71,7 @@
 <br>
 
 <h2>Comptes</h2>
+
 <table class="pure-table">
 	<thead>
 		<tr>
@@ -89,10 +90,31 @@
 	{% endfor %}
 
 	<tr>
-		<td colspan="2"><b>Total dépenses groupe : {{ team.get_total_spent() }} €</b></td>
+		<td colspan="2" style="text-align: right"><b>Total dépenses groupe : {{ team.get_total_spent() }} €</b></td>
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align: right"><b>Dépense moyenne par personne : {{ team.get_avg_spent() }} €</b></td>
 	</tr>
 
 </table>
+
+<h2>Régularisations</h2>
+<table class="pure-table">
+	<thead>
+		<tr>
+			<th>Qui doit combien à qui</th>
+		</tr>
+	</thead>
+	
+	{% for transaction in team.get_money_distribution() %}
+		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
+			<td><b>{{ transaction.from }}</b> doit <b>{{ transaction.amount }}</b>€ à <b>{{ transaction.to }}</b></td> 
+		</tr> 
+	{% endfor %}
+</table>
+
+
+
 
 <br>
 

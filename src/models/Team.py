@@ -1,5 +1,5 @@
 from models.db import *
-
+from utils.money_distribution import get_money_distribution
 
 class Team:
 
@@ -24,11 +24,40 @@ class Team:
 		res = query_fetch_one(sql, (int(self.id),))
 		return res['sum'] or 0
 
+	def get_avg_spent(self):
+		return self.get_total_spent() / len(self.get_users())
+
+	def get_money_distribution(self):
+		ret = []
+		total_spent = self.get_total_spent()
+		users = self.get_users()
+		avg = total_spent / len(users)
+		expenditures = [0] * len(users)
+		for i in range(len(users)):
+			expenditures[i] = users[i].get_total_spent_in_team(self.id)
+
+		distribution = get_money_distribution(expenditures)
+
+		for i in range(len(distribution)):
+			for j in range(len(distribution[i])):
+				if distribution[i][j] != 0:
+					ret.append({'from': users[i].name, 'to': users[j].name, 'amount': distribution[i][j]})
+		return ret
+
+
 	def add_user(self, uid):
 		sql = """INSERT INTO users_by_teams (id, user_id, team_id)
 				 VALUES(NULL, %s, %s)"""
 		cur = query(sql, (int(uid), int(self.id)))
 		cur.close()
+
+	def contains_user(self, uid):
+		sql = "SELECT id FROM users_by_teams WHERE team_id=%s AND user_id=%s";
+		cur = cursor()
+		cur.execute(sql, (int(self.id), int(uid)))
+		ret = (cur.rowcount == 1)
+		cur.close()
+		return ret
 
 
 	@staticmethod
