@@ -1,17 +1,31 @@
 import MySQLdb
+from MySQLdb import OperationalError
 
-db = MySQLdb.connect(host="localhost",
-    user="root",
-    passwd="aaaaaa",
-    db="depenses",
-    autocommit=True)
+
+
+def connect():
+
+	db = MySQLdb.connect(host="localhost",
+	    user="root",
+	    passwd="aaaaaa",
+	    db="depenses",
+	    autocommit=True)
+	return db
+
+
 
 def cursor():
 	return db.cursor(cursorclass=MySQLdb.cursors.DictCursor)
 
 def query(*args, **kwargs):
+	global db
 	cur = cursor()
-	cur.execute(*args, **kwargs)
+	try:
+		cur.execute(*args, **kwargs)
+	except OperationalError as e:
+		db = connect()
+		cur = cursor()
+		cur.execute(*args, **kwargs)
 	return cur
 
 def query_fetch_all(*args, **kwargs):
@@ -31,3 +45,6 @@ def num_rows(*args, **kwargs):
 	res = cur.rowcount
 	cur.close()
 	return res
+
+db = connect()
+
