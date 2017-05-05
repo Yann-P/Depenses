@@ -4,29 +4,31 @@
 <h1>Tableau de bord</h1>
 
 <h2>Mes dépenses (tous groupes confondus)</h2>
-<table class="pure-table pure-table-bordered">
-	<thead>
-		<tr>
-			<th>Groupe</th>
-			<th>Date</th>
-			<th>Intitulé</th>
-			<th>Montant</th>
-			<th>Commentaire</th>
-		</tr>
-	</thead>
+<div class="responsive-table-container">
+	<table class="pure-table pure-table-bordered">
+		<thead>
+			<tr>
+				<th>Groupe</th>
+				<th>Date</th>
+				<th>Intitulé</th>
+				<th>Montant</th>
+				<th>Commentaire</th>
+			</tr>
+		</thead>
 
-	{% for e in own_expenditures %}
+		{% for e in own_expenditures %}
 
-		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-			<td>{{ e.get_team().name }}</td>
-			<td>{{ e.date }}</td>
-			<td>{{ e.title }}</td>
-			<td>{{ e.amount }}</td>
-			<td>{{ e.comment }}</td>
-		</tr>
+			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
+				<td>{{ e.get_team().name }}</td>
+				<td>{{ e.date }}</td>
+				<td>{{ e.title }}</td>
+				<td>{{ e.amount }}</td>
+				<td>{{ e.comment }}</td>
+			</tr>
 
-	{% endfor %}
+		{% endfor %}
 
-</table>
+	</table>
+</div>
 
 {% endblock %}

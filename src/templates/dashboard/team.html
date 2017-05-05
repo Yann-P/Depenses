@@ -43,66 +43,68 @@
 <br>
 
 <h2>Dépenses en commun</h2>
-<table class="pure-table" id="expenditures">
-	<thead>
-		<tr>
-			<th>Date</th>
-			<th>Qui a payé</th>
-			<th>Intitulé</th>
-			<th>Montant</th>
-			<th>Commentaire</th>
-			<th></th>
-		</tr>
-	</thead>
+<div class="responsive-table-container">
+	<table class="pure-table" id="expenditures">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Qui a payé</th>
+				<th>Intitulé</th>
+				<th>Montant</th>
+				<th>Commentaire</th>
+				<th></th>
+			</tr>
+		</thead>
 
-	{% for expenditure in team_expenditures %}
+		{% for expenditure in team_expenditures %}
 
-		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-			<td>{{ expenditure.date }}</td>
-			<td>{{ expenditure.get_user().name }}</td>
-			<td>{{ expenditure.title }}</td>
-			<td>{{ expenditure.amount }}</td>
-			<td>{{ expenditure.comment }}</td>
-			<td>
-				<form action="{{ url_for('team.remove_expenditure', tid=team.id) }}" method="post" onsubmit="return confirm('Supprimer cette entrée ?')">
-					<input type="hidden" name="eid" value="{{ expenditure.id }}">
-					<button type="submit" class="button-error pure-button">&times;</button>
-				</form>
-			</td>
-		</tr>
+			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
+				<td>{{ expenditure.date }}</td>
+				<td>{{ expenditure.get_user().name }}</td>
+				<td>{{ expenditure.title }}</td>
+				<td>{{ expenditure.amount }}</td>
+				<td>{{ expenditure.comment }}</td>
+				<td>
+					<form action="{{ url_for('team.remove_expenditure', tid=team.id) }}" method="post" onsubmit="return confirm('Supprimer cette entrée ?')">
+						<input type="hidden" name="eid" value="{{ expenditure.id }}">
+						<button type="submit" class="button-error pure-button">&times;</button>
+					</form>
+				</td>
+			</tr>
 
-	{% endfor %}
+		{% endfor %}
 
-</table>
-
+	</table>
+</div>
 <br>
 
+<div class="responsive-table-container">
+	<table class="pure-table pure-table-bordered">
+		<thead>
+			<tr>
+				<th>Total payé par</th>
+				<th>Montant</th>
+			</tr>
+		</thead>
 
-<table class="pure-table pure-table-bordered">
-	<thead>
+		{% for user in team.get_users() %}
+
+			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
+				<td>{{ user.name }}</td>
+				<td>{{ user.get_total_spent_in_team(team.id) | round(2)}} €</td>
+			</tr>
+
+		{% endfor %}
+
 		<tr>
-			<th>Total payé par</th>
-			<th>Montant</th>
+			<td colspan="2" style="text-align: right"><b>Total dépenses groupe : {{ team.get_total_spent() | round(2) }} €</b></td>
 		</tr>
-	</thead>
-
-	{% for user in team.get_users() %}
-
-		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-			<td>{{ user.name }}</td>
-			<td>{{ user.get_total_spent_in_team(team.id) | round(2)}} €</td>
+		<tr>
+			<td colspan="2" style="text-align: right"><b>Dépense moyenne par personne : {{ team.get_avg_spent() | round(2) }} €</b></td>
 		</tr>
 
-	{% endfor %}
-
-	<tr>
-		<td colspan="2" style="text-align: right"><b>Total dépenses groupe : {{ team.get_total_spent() | round(2) }} €</b></td>
-	</tr>
-	<tr>
-		<td colspan="2" style="text-align: right"><b>Dépense moyenne par personne : {{ team.get_avg_spent() | round(2) }} €</b></td>
-	</tr>
-
-</table>
+	</table>
+</div>
 
 
 <h2>Remboursements</h2>
@@ -111,82 +113,85 @@ Les remboursements sont pris en compte dans les comptes. Compteception.<br><br>
 </em>
 
 
-<table class="pure-table pure-table-bordered">
+<div class="responsive-table-container">
+	<table class="pure-table pure-table-bordered">
 
-	<thead>
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Remboursement</th>
+			</tr>
+		</thead>
+
+		{% for reimbursement in team_reimbursements %}
+
+			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
+				<td>{{ reimbursement.date }}</td>
+				<td>{{ reimbursement.get_sender_user().name }} a remboursé {{ reimbursement.amount }} € à {{ reimbursement.get_recipient_user().name }}</td>
+			</tr>
+
+		{% endfor %}
+
 		<tr>
-			<th>Date</th>
-			<th>Remboursement</th>
+			<td colspan="2">
+				<form class="pure-form pure-form-stacked" method="post" action="{{ url_for('team.add_reimbursement', tid=team.id) }}">
+
+					<div class="pure-g">
+						<div class="pure-u-1 pure-u-md-1-5">
+							<label>Émetteur</label>
+							<select name="sender" class="pure-u-23-24">
+								{% for user in team.get_users() %}
+									<option value="{{ user.id }}">{{ user.name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="pure-u-1 pure-u-md-1-5">
+							<label>Montant (€)</label>
+							<input type="number" step="0.01" name="amount"  class="pure-u-23-24">
+						</div>
+						<div class="pure-u-1 pure-u-md-1-5">
+							<label>Bénéficiaire</label>
+							<select name="recipient" class="pure-u-23-24">
+								{% for user in team.get_users() %}
+									<option value="{{ user.id }}">{{ user.name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="pure-u-1 pure-u-md-1-5">
+							<label>Commentaire</label>
+							<input type="text" name="comment" placeholder="(facultatif)" class="pure-u-23-24">
+						</div>
+
+						<div class="pure-u-1 pure-u-md-1-5">
+							<label>&nbsp;</label>
+							<input type="submit" value="OK" class="pure-button pure-button-primary">
+						</div>
+					</div>
+				</form>
+
+			</td>
 		</tr>
-	</thead>
 
-	{% for reimbursement in team_reimbursements %}
-
-		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-			<td>{{ reimbursement.date }}</td>
-			<td>{{ reimbursement.get_sender_user().name }} a remboursé {{ reimbursement.amount }} € à {{ reimbursement.get_recipient_user().name }}</td>
-		</tr>
-
-	{% endfor %}
-
-	<tr>
-		<td colspan="2">
-			<form class="pure-form pure-form-stacked" method="post" action="{{ url_for('team.add_reimbursement', tid=team.id) }}">
-
-				<div class="pure-g">
-					<div class="pure-u-1 pure-u-md-1-5">
-						<label>Émetteur</label>
-						<select name="sender" class="pure-u-23-24">
-							{% for user in team.get_users() %}
-								<option value="{{ user.id }}">{{ user.name }}</option>
-							{% endfor %}
-						</select>
-					</div>
-					<div class="pure-u-1 pure-u-md-1-5">
-						<label>Montant (€)</label>
-						<input type="number" step="0.01" name="amount"  class="pure-u-23-24">
-					</div>
-					<div class="pure-u-1 pure-u-md-1-5">
-						<label>Bénéficiaire</label>
-						<select name="recipient" class="pure-u-23-24">
-							{% for user in team.get_users() %}
-								<option value="{{ user.id }}">{{ user.name }}</option>
-							{% endfor %}
-						</select>
-					</div>
-					<div class="pure-u-1 pure-u-md-1-5">
-						<label>Commentaire</label>
-						<input type="text" name="comment" placeholder="(facultatif)" class="pure-u-23-24">
-					</div>
-
-					<div class="pure-u-1 pure-u-md-1-5">
-						<label>&nbsp;</label>
-						<input type="submit" value="OK" class="pure-button pure-button-primary">
-					</div>
-				</div>
-			</form>
-
-		</td>
-	</tr>
-
-</table>
+	</table>
+</div>
 
 <h2>Comptes</h2>
 
-
-<table class="pure-table">
-	<thead>
-		<tr>
-			<th>Qui doit combien à qui</th>
-		</tr>
-	</thead>
-	
-	{% for transaction in team.get_money_distribution() %}
-		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-			<td><b>{{ transaction.from }}</b> doit <b>{{ transaction.amount | round(2) }}</b> € à <b>{{ transaction.to }}</b></td> 
-		</tr> 
-	{% endfor %}
-</table>
+<div class="responsive-table-container">
+	<table class="pure-table">
+		<thead>
+			<tr>
+				<th>Qui doit combien à qui</th>
+			</tr>
+		</thead>
+		
+		{% for transaction in team.get_money_distribution() %}
+			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
+				<td><b>{{ transaction.from }}</b> doit <b>{{ transaction.amount | round(2) }}</b> € à <b>{{ transaction.to }}</b></td> 
+			</tr> 
+		{% endfor %}
+	</table>
+</div>
 
 <br>
 

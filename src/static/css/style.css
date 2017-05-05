@@ -25,6 +25,10 @@ table {
     width: 99%;
 }
 
+.responsive-table-container {
+    overflow-x: scroll;
+}
+
 .error {
 	color: red;
 }
@@ -52,7 +56,7 @@ table {
     color: red;
     text-shadow: 1px 1px 0 white;
 }
-
+/*
 .home-menu {
 	background: #6797ab;
 	padding: 5px;
@@ -81,7 +85,7 @@ table {
 .home-menu ul {
     float: right;
 }
-
+*/
 .footer a {
     color: #666;
 }
