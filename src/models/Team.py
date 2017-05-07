@@ -47,7 +47,7 @@ class Team:
 
 		for i in range(len(distribution)):
 			for j in range(len(distribution[i])):
-				if distribution[i][j] != 0:
+				if distribution[i][j] > 0.005:
 					ret.append({'from': users[i].name, 'to': users[j].name, 'amount': distribution[i][j]})
 		return ret
 

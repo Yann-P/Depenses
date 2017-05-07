@@ -185,6 +185,7 @@ a, a:hover, a:visited {
 table#expenditures th, table#expenditures td {
     padding: 4px;
     font-size: .9em;
+    color: #333;
 }
 
 table#expenditures button {

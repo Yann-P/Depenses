@@ -31,7 +31,7 @@
 				<td>{{ exp.get_team().name }}</td>
 				<td>{{ exp.date }}</td>
 				<td>{{ exp.title }}</td>
-				<td>{{ exp.amount }} €</td>
+				<td>{{ exp.amount | round(2)  }} €</td>
 				<td>{{ exp.comment }}</td>
 			</tr>
 
@@ -39,7 +39,7 @@
 
 		<tr class="balance">
 			<td colspan="3"><b>Total</b></td>
-			<td><b class="negative">{{ total_spent }} €</b></td>
+			<td><b class="negative">{{ total_spent | round(2) }} €</b></td>
 			<td></td>
 		</tr>
 
@@ -75,12 +75,12 @@
 				</td>
 				<td class="positive">
 					{% if transaction.to_user == g.user.id %}
-						+{{ transaction.amount }} €
+						{{ transaction.amount | round(2) }} €
 					{% endif %}
 				</td>
 				<td class="negative">
 					{% if transaction.from_user == g.user.id %}
-						-{{ transaction.amount }} €
+						{{ transaction.amount | round(2) }} €
 					{% endif %}
 				</td>
 				<td>{{ transaction.comment }}</td>
@@ -89,16 +89,16 @@
 
 		<tr class="balance">
 			<td colspan="3"></td>
-			<td><b class="positive">{{ total_received }}  €</b></td>
-			<td><b class="negative">-{{ total_sent }} €</b></td>
+			<td><b class="positive">{{ total_received | round(2) }}  €</b></td>
+			<td><b class="negative">{{ total_sent | round(2) }} €</b></td>
 			<td></td>
 		</tr>
 
 		<tr class="balance">
 			<td colspan="3">Total</td>
 			<td colspan="2">
-				<b class="{% if transactions_balance < 0 %}negative{% else %}positive{% endif %}">
-					{{ transactions_balance }} €
+				<b>
+					{{ transactions_balance | round(2) }} €
 				</b>
 			</td>
 			<td></td>
@@ -123,19 +123,19 @@
 		<tr class="balance">
 			<td>Dépenses</td>
 			<td>&mdash;</td>
-			<td>{{ total_spent }} €</td>
+			<td><b class="negative">{{ total_spent | round(2) }} €</b></td>
 		</tr>
 
 		<tr class="balance">
 			<td>Transactions</td>
-			<td><b class="positive">{{ total_received }} €</b></td>
-			<td><b class="negative">-{{ total_sent }} €</b></td>
+			<td><b class="positive">{{ total_received | round(2) }} €</b></td>
+			<td><b class="negative">{{ total_sent | round(2) }} €</b></td>
 		</tr>
 		<tr class="balance">
 			<td>Total</td>
 			<td colspan="2">
-				<b class="{% if balance < 0 %}negative{% else %}positive{% endif %}">
-					{{ balance }} €
+				<b>
+					{{ balance | round(2) }} €
 				</b>
 			</td>
 		</tr>

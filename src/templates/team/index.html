@@ -62,7 +62,7 @@
 				<td>{{ expenditure.date }}</td>
 				<td>{{ expenditure.get_user().name }}</td>
 				<td>{{ expenditure.title }}</td>
-				<td>{{ expenditure.amount }}</td>
+				<td>{{ expenditure.amount | round(2) }} €</td>
 				<td>{{ expenditure.comment }}</td>
 				<td>
 					<form action="{{ url_for('team.remove_expenditure', tid=team.id) }}" method="post" onsubmit="return confirm('Supprimer cette entrée ?')">
@@ -121,11 +121,12 @@ Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions s
 				<th>Date</th>
 				<th>Transaction</th>
 				<th>Montant</th>
+				<th>Commentaire</th>
 			</tr>
 		</thead>
 
 		{% if team_transactions | length == 0 %}
-			<tr><td colspan="3">Rien à afficher</td></tr>
+			<tr><td colspan="4">Rien à afficher</td></tr>
 		{% endif %}
 
 		{% for transaction in team_transactions %}
@@ -133,13 +134,14 @@ Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions s
 			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
 				<td>{{ transaction.date }}</td>
 				<td>{{ transaction.get_sender_user().name }} &rarr; {{ transaction.get_recipient_user().name }}</td>
-				<td>{{ transaction.amount }} €</td>
+				<td>{{ transaction.amount | round(2) }} €</td>
+				<td>{{ transaction.comment }}</td>
 			</tr>
 
 		{% endfor %}
 
 		<tr>
-			<td colspan="2">
+			<td colspan="4">
 				<form class="pure-form pure-form-stacked" method="post" action="{{ url_for('team.add_transaction', tid=team.id) }}">
 
 					<div class="pure-g">
