@@ -3,6 +3,15 @@
 {% block body %}
 <h1>Tableau de bord</h1>
 
+
+<h2>Mes groupes <a href="{{ url_for('dashboard.teams') }}">(voir tout &rarr;)</a></h2>
+<ul>
+	{% for team in g.user.get_teams() %}
+		<li><a href="{{ url_for('team.index', tid=team.id)}}">{{ team.name }}</a></li>
+	{% endfor %}
+</ul>
+
+
 <h2>Mes dépenses (tous groupes confondus)</h2>
 <div class="responsive-table-container">
 	<table class="pure-table pure-table-bordered">
@@ -16,19 +25,123 @@
 			</tr>
 		</thead>
 
-		{% for e in own_expenditures %}
+		{% for exp in own_expenditures %}
 
 			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-				<td>{{ e.get_team().name }}</td>
-				<td>{{ e.date }}</td>
-				<td>{{ e.title }}</td>
-				<td>{{ e.amount }}</td>
-				<td>{{ e.comment }}</td>
+				<td>{{ exp.get_team().name }}</td>
+				<td>{{ exp.date }}</td>
+				<td>{{ exp.title }}</td>
+				<td>{{ exp.amount }} €</td>
+				<td>{{ exp.comment }}</td>
 			</tr>
 
 		{% endfor %}
 
+		<tr class="balance">
+			<td colspan="3"><b>Total</b></td>
+			<td><b class="negative">{{ total_spent }} €</b></td>
+			<td></td>
+		</tr>
+
 	</table>
 </div>
+
+<br>
+
+<h2>Mes transactions (crédits et débits, tous groupes confondus)</h2>
+<div class="responsive-table-container">
+	<table class="pure-table pure-table-bordered">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Groupe</th>
+				<th>Qui</th>
+				<th>Crédit</th>
+				<th>Débit</th>
+				<th>Commentaire</th>
+			</tr>
+		</thead>
+
+		{% for transaction in own_transactions %}
+			<tr>
+				<td>{{ transaction.date }}</td>
+				<td>{{ transaction.get_team().name }}</td>
+				<td>
+					{% if transaction.from_user == g.user.id %}
+						{{ transaction.get_recipient_user().name }}
+					{% else %} 
+						{{ transaction.get_sender_user().name }}
+					{% endif %}
+				</td>
+				<td class="positive">
+					{% if transaction.to_user == g.user.id %}
+						+{{ transaction.amount }} €
+					{% endif %}
+				</td>
+				<td class="negative">
+					{% if transaction.from_user == g.user.id %}
+						-{{ transaction.amount }} €
+					{% endif %}
+				</td>
+				<td>{{ transaction.comment }}</td>
+			</tr>
+		{% endfor %}
+
+		<tr class="balance">
+			<td colspan="3"></td>
+			<td><b class="positive">{{ total_received }}  €</b></td>
+			<td><b class="negative">-{{ total_sent }} €</b></td>
+			<td></td>
+		</tr>
+
+		<tr class="balance">
+			<td colspan="3">Total</td>
+			<td colspan="2">
+				<b class="{% if transactions_balance < 0 %}negative{% else %}positive{% endif %}">
+					{{ transactions_balance }} €
+				</b>
+			</td>
+			<td></td>
+		</tr>
+
+	</table>
+</div>
+
+<br>
+
+<h2>Totaux (tous groupes confondus)</h2>
+<div class="responsive-table-container">
+	<table class="pure-table pure-table-bordered">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Crédit</th>
+				<th>Débit</th>
+			</tr>
+		</thead>
+
+		<tr class="balance">
+			<td>Dépenses</td>
+			<td>&mdash;</td>
+			<td>{{ total_spent }} €</td>
+		</tr>
+
+		<tr class="balance">
+			<td>Transactions</td>
+			<td><b class="positive">{{ total_received }} €</b></td>
+			<td><b class="negative">-{{ total_sent }} €</b></td>
+		</tr>
+		<tr class="balance">
+			<td>Total</td>
+			<td colspan="2">
+				<b class="{% if balance < 0 %}negative{% else %}positive{% endif %}">
+					{{ balance }} €
+				</b>
+			</td>
+		</tr>
+
+	</table>
+</div>
+
 
 {% endblock %}

@@ -20,12 +20,35 @@ class User:
 			ret.append(Team.from_id(row['tid']))
 		return ret
 
-	def get_total_spent_in_team(self, tid):
+	def get_total_received(self, tid=None):
+		sql = "SELECT SUM(amount) AS total FROM transaction WHERE to_user=%s"
+		params = (int(self.id),)
+		if tid:
+			sql += " AND team_id=%s"
+			params = (int(self.id), int(tid))
+		res = query_fetch_one(sql, params)
+		return float(res['total'] or 0)
+
+	def get_total_sent(self, tid=None):
+		sql = "SELECT SUM(amount) AS total FROM transaction WHERE from_user=%s"
+		params = (int(self.id),)
+		if tid:
+			sql += " AND team_id=%s"
+			params = (int(self.id), int(tid))
+		res = query_fetch_one(sql, params)
+		return float(res['total'] or 0)
+
+	def get_total_spent(self, tid=None):
 		sql = """SELECT SUM(amount) AS "sum"
 				 FROM expenditure
-				 WHERE user_id=%s 
-				 AND team_id=%s"""
-		res = query_fetch_one(sql, (int(self.id), int(tid)))
+				 WHERE user_id=%s"""
+		params = [int(self.id)]
+
+		if tid is not None:
+			sql += " AND team_id=%s"
+			params.append(int(tid))
+
+		res = query_fetch_one(sql, params)
 		return res['sum'] or 0
 
 

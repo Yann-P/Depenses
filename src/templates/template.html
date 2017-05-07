@@ -25,11 +25,11 @@
 	            <ul class="pure-menu-list">
 	                {% if g.user %}
 						<li class="pure-menu-item">
-							<a href="{{ url_for('team.index') }}" class="pure-menu-link">Dépenses</a>
+							<a href="{{ url_for('dashboard.index') }}" class="pure-menu-link">Dashboard</a>
 						</li>
 
 						<li class="pure-menu-item">
-							<a href="{{ url_for('team.list') }}" class="pure-menu-link">Groupes</a>
+							<a href="{{ url_for('dashboard.teams') }}" class="pure-menu-link">Groupes</a>
 						</li>
 			 
 						<li class="pure-menu-item">
@@ -43,36 +43,6 @@
 	            </ul>
 	        </div>
 	    </div>
-		{# <header>
-
-			<div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-				<a class="pure-menu-heading" href="{{ url_for('index') }}">
-					{% if g.user %}{{ g.user.name }}{% else %}DEPENSES{% endif %}
-				</a>
-
-				<ul class="pure-menu-list">
-					
-					{% if g.user %}
-						<li class="pure-menu-item pure-menu-selected">
-							<a href="{{ url_for('team.index') }}" class="pure-menu-link">Dépenses</a>
-						</li>
-
-						<li class="pure-menu-item pure-menu-selected">
-							<a href="{{ url_for('team.list') }}" class="pure-menu-link">Groupes</a>
-						</li>
-			 
-						<li class="pure-menu-item">
-							
-							<a href="{{ url_for('user.logout') }}" class="pure-menu-link"> <b>&rarr;</b>[]</a>
-						</li>
-
-					{% else %}
-						<li class="pure-menu-item"><a href="{{ url_for('user.login') }}" class="pure-menu-link">Connexion</a></li>
-					{% endif %}
-					
-				</ul>
-			</div>
-		</header> #}
 		{% block body_fullwidth %}{% endblock %}
 
 		<div class="content">

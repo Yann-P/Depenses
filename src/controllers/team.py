@@ -6,7 +6,7 @@ from models.db import *
 from models.Team import Team
 from models.User import User
 from models.Expenditure import Expenditure
-from models.Reimbursement import Reimbursement
+from models.Transaction import Transaction
 
 from utils.middleware import *
 import sys
@@ -15,29 +15,18 @@ import sys
 team = Blueprint('team', __name__, template_folder='templates')
 
 
-@team.route('/', methods=["get"])
-@require_user
-def index():
-	return render_template('dashboard/index.html', own_expenditures=Expenditure.get_for_user(g.user.id))
-
-
-@team.route('/list', methods=['get'])
-@require_user
-def list():
-	return render_template('dashboard/teams.html', own_teams=g.user.get_teams())
-
-
 @team.route('/<int:tid>', methods=['get'])
 @require_user
 @current_user_belongs_to_team
-def view(tid):
+def index(tid):
 	team = Team.from_id(tid)
 	if not team:
 		abort(404)
-	return render_template('dashboard/team.html', 
+	return render_template('team/index.html', 
 		team=team, 
 		team_expenditures=Expenditure.get_for_team(tid),
-		team_reimbursements=Reimbursement.get_for_team(tid))
+		team_transactions=Transaction.get_for_team(tid),
+		money_distribution=team.get_money_distribution())
 
 
 @team.route('/<int:tid>/add_expenditure', methods=['post'])
@@ -50,19 +39,19 @@ def add_expenditure(tid):
 	comment 	= request.form.get('comment')
 	if amount > 0 and title:
 		Expenditure.insert(team_id=tid, user_id=who_paid, amount=amount, title=title, comment=comment)
-	return redirect(url_for('team.view', tid=tid))
+	return redirect(url_for('team.index', tid=tid))
 
-@team.route('/<int:tid>/add_reimbursement', methods=['post'])
+@team.route('/<int:tid>/add_transaction', methods=['post'])
 @require_user
 @current_user_belongs_to_team
-def add_reimbursement(tid):
+def add_transaction(tid):
 	sender 		= request.form.get('sender')
 	recipient 	= request.form.get('recipient')
 	amount 		= float(request.form.get('amount') or 0)
 	comment 	= request.form.get('comment')
 	if amount > 0 and sender != recipient:
-		Reimbursement.insert(from_user=sender, to_user=recipient, amount=amount, comment=comment, team_id=tid)
-	return redirect(url_for('team.view', tid=tid))
+		Transaction.insert(from_user=sender, to_user=recipient, amount=amount, comment=comment, team_id=tid)
+	return redirect(url_for('team.index', tid=tid))
 
 
 @team.route('/<int:tid>/remove_expenditure', methods=['post'])
@@ -73,7 +62,7 @@ def remove_expenditure(tid):
 	expenditure = Expenditure.from_id(eid)
 	if expenditure and expenditure.team_id == tid:
 		Expenditure.remove(eid)
-	return redirect(url_for('team.view', tid=tid))
+	return redirect(url_for('team.index', tid=tid))
 
 
 @team.route('/<int:tid>/add_user', methods=['post'])
@@ -84,7 +73,7 @@ def add_user(tid):
 	user = User.from_name(user_name)
 	if user:
 		Team.from_id(tid).add_user(user.id)
-	return redirect(url_for('team.view', tid=tid))
+	return redirect(url_for('team.index', tid=tid))
 
 
 @team.route('/<int:tid>/remove_user/<int:uid>', methods=['get'])
@@ -95,8 +84,8 @@ def remove_user(tid, uid):
 	users = team.get_users()
 	if len(users) > 1:
 		team.remove_user(uid)
-		return redirect(url_for('team.view', tid=tid))
-	return redirect(url_for('team.view', tid=tid))
+		return redirect(url_for('team.index', tid=tid))
+	return redirect(url_for('team.index', tid=tid))
 
 
 @team.route('/add', methods=['post'])
@@ -105,8 +94,8 @@ def add():
 	name 		= request.form.get('name')
 	description = request.form.get('description')
 	if(Team.exists(name)):
-		return redirect(url_for('team.list'), error_team_exists=True)
+		return redirect(url_for('dashboard.teams'), error_team_exists=True)
 
 	team = Team.insert(name=name, description=description)
 	team.add_user(g.user.id)
-	return redirect(url_for('team.list'))
+	return redirect(url_for('dashboard.teams'))

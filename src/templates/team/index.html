@@ -91,7 +91,7 @@
 
 			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
 				<td>{{ user.name }}</td>
-				<td>{{ user.get_total_spent_in_team(team.id) | round(2)}} €</td>
+				<td>{{ user.get_total_spent(team.id) | round(2)}} €</td>
 			</tr>
 
 		{% endfor %}
@@ -107,9 +107,9 @@
 </div>
 
 
-<h2>Remboursements</h2>
+<h2>Transactions</h2>
 <em>
-Les remboursements sont pris en compte dans les comptes. Compteception.<br><br>
+Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions sont prises en considération dans les comptes. <br><br>
 </em>
 
 
@@ -119,22 +119,28 @@ Les remboursements sont pris en compte dans les comptes. Compteception.<br><br>
 		<thead>
 			<tr>
 				<th>Date</th>
-				<th>Remboursement</th>
+				<th>Transaction</th>
+				<th>Montant</th>
 			</tr>
 		</thead>
 
-		{% for reimbursement in team_reimbursements %}
+		{% if team_transactions | length == 0 %}
+			<tr><td colspan="3">Rien à afficher</td></tr>
+		{% endif %}
+
+		{% for transaction in team_transactions %}
 
 			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-				<td>{{ reimbursement.date }}</td>
-				<td>{{ reimbursement.get_sender_user().name }} a remboursé {{ reimbursement.amount }} € à {{ reimbursement.get_recipient_user().name }}</td>
+				<td>{{ transaction.date }}</td>
+				<td>{{ transaction.get_sender_user().name }} &rarr; {{ transaction.get_recipient_user().name }}</td>
+				<td>{{ transaction.amount }} €</td>
 			</tr>
 
 		{% endfor %}
 
 		<tr>
 			<td colspan="2">
-				<form class="pure-form pure-form-stacked" method="post" action="{{ url_for('team.add_reimbursement', tid=team.id) }}">
+				<form class="pure-form pure-form-stacked" method="post" action="{{ url_for('team.add_transaction', tid=team.id) }}">
 
 					<div class="pure-g">
 						<div class="pure-u-1 pure-u-md-1-5">
@@ -184,8 +190,12 @@ Les remboursements sont pris en compte dans les comptes. Compteception.<br><br>
 				<th>Qui doit combien à qui</th>
 			</tr>
 		</thead>
-		
-		{% for transaction in team.get_money_distribution() %}
+
+		{% if money_distribution | length == 0 %}
+			<tr><td>Tout est équilibré :)</td></tr>
+		{% endif %}
+
+		{% for transaction in money_distribution %}
 			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
 				<td><b>{{ transaction.from }}</b> doit <b>{{ transaction.amount | round(2) }}</b> € à <b>{{ transaction.to }}</b></td> 
 			</tr> 
@@ -195,7 +205,7 @@ Les remboursements sont pris en compte dans les comptes. Compteception.<br><br>
 
 <br>
 
-<h2>Qui qu'est dans l'groupe</h2>
+<h2>Membres du groupe</h2>
 <ul class="users">
 	{% for user in team.get_users() %}
 		<li><div class="user">{{ user.name }} {# <a href="{{ url_for('team.remove_user', tid=team.id, uid=user.id)}}" class="delete-user" onclick="return confirm('Supprimer cet utilisateur du groupe ?')">&times;</a>#}</div> </li>

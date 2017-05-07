@@ -4,7 +4,7 @@
 <h1>Groupes</h1>
 
 <h2>Mes groupes</h2>
-<table class="pure-table">
+<table class="pure-table responsive-table-container">
 	<thead>
 		<tr>
 			<th>Nom</th>
@@ -13,10 +13,10 @@
 		</tr>
 	</thead>
 
-	{% for team in own_teams %}
+	{% for team in g.user.get_teams() %}
 
 		<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-			<td><a href="{{ team.id }}"><b>{{ team.name }}</b></a></td>
+			<td><a href="{{ url_for('team.index', tid=team.id) }}"><b>{{ team.name }}</b></a></td>
 			<td>{{ team.description }}</td>
 			<td>
 				{% for user in team.get_users() %}

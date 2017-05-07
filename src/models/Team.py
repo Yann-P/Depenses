@@ -17,20 +17,12 @@ class Team:
 			ret.append(User.from_id(row['user_id']))
 		return ret
 
-	def get_total_reimbursements_between(self, uid1, uid2):
-		positive = query_fetch_one("SELECT SUM(amount) AS res FROM reimbursement WHERE from_user=%s AND to_user=%s AND team_id=%s", (int(uid1), int(uid2), int(self.id)))
-		negative = query_fetch_one("SELECT SUM(amount) AS res FROM reimbursement WHERE to_user=%s AND from_user=%s AND team_id=%s", (int(uid1), int(uid2), int(self.id)))
+	def get_total_transactions_between(self, uid1, uid2):
+		positive = query_fetch_one("SELECT SUM(amount) AS res FROM transaction WHERE from_user=%s AND to_user=%s AND team_id=%s", (int(uid1), int(uid2), int(self.id)))
+		negative = query_fetch_one("SELECT SUM(amount) AS res FROM transaction WHERE to_user=%s AND from_user=%s AND team_id=%s", (int(uid1), int(uid2), int(self.id)))
 		positive = float(positive['res'] or 0)
 		negative = float(negative['res'] or 0)
 		return - positive + negative
-
-	def get_total_received(self, uid,):
-		res = query_fetch_one("SELECT SUM(amount) AS total FROM reimbursement WHERE to_user=%s AND team_id=%s", (int(uid), int(self.id)))
-		return float(res['total'] or 0)
-
-	def get_total_sent(self, uid):
-		res = query_fetch_one("SELECT SUM(amount) AS total FROM reimbursement WHERE from_user=%s AND team_id=%s", (int(uid), int(self.id)))
-		return float(res['total'] or 0)
 
 	def get_total_spent(self):
 		sql = """SELECT SUM(amount) AS "sum"
@@ -49,14 +41,13 @@ class Team:
 		avg = total_spent / len(users)
 		expenditures = [0] * len(users)
 		for i in range(len(users)):
-			expenditures[i] = users[i].get_total_spent_in_team(self.id) + self.get_total_sent(users[i].id) - self.get_total_received(users[i].id)
+			expenditures[i] = users[i].get_total_spent(self.id) + users[i].get_total_sent(self.id) - users[i].get_total_received(self.id)
 
 		distribution = get_money_distribution(expenditures)
 
 		for i in range(len(distribution)):
 			for j in range(len(distribution[i])):
 				if distribution[i][j] != 0:
-					#distribution[i][j] += self.get_total_reimbursements_between(users[i].id, users[j].id)
 					ret.append({'from': users[i].name, 'to': users[j].name, 'amount': distribution[i][j]})
 		return ret
 

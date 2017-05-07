@@ -7,6 +7,23 @@
 	margin-top:70px;
 }
 
+.positive {
+    color: green;
+}
+
+.negative {
+    color: indianred;
+}
+
+table tr.balance td {
+    text-align: right;
+    background: #eee;
+}
+
+.pure-table-bordered td {
+    color: #333;
+}
+
 body {
 	font-family: 'Source Sans Pro', arial, sans-serif;
 }
@@ -25,8 +42,17 @@ table {
     width: 99%;
 }
 
-.responsive-table-container {
-    overflow-x: scroll;
+a, a:hover, a:visited {
+    color: #1f8dd6;
+    text-decoration: none;
+}
+
+@media (max-width: 48em) {
+
+
+    .responsive-table-container {
+        overflow-x: scroll;
+    }
 }
 
 .error {
@@ -56,36 +82,8 @@ table {
     color: red;
     text-shadow: 1px 1px 0 white;
 }
-/*
-.home-menu {
-	background: #6797ab;
-	padding: 5px;
-}
-
-.home-menu .pure-menu-heading {
-    color: white;
-}
 
 
-.pure-menu-selected .pure-menu-link, .pure-menu-selected .pure-menu-link:visited {
-	color: white;
-}
-
-.home-menu a {
-    color: white;
-}
-.home-menu li a:hover,
-.home-menu li a:focus,
-.home-menu li a:visited {
-    background: none;
-    border: none;
-    color: white;
-}
-
-.home-menu ul {
-    float: right;
-}
-*/
 .footer a {
     color: #666;
 }
@@ -122,8 +120,12 @@ table {
 }
 
 .splash h1 {
-    font-size: 5em;
+    font-size: 4em;
     border-bottom: 0;
+}
+
+.splash a {
+    color: white;
 }
 
 .splash-head {
