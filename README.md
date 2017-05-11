@@ -1,8 +1,8 @@
-# Dépenses.py
+# Dépenses.py
 
 The purpose of this web app is to organize a budget within a group with shared expenditures.
 
-## Features
+## Features
 
  - Keep track of expenditures and reimbursements within groups
  - Calculates who owns money to who (takes expentidures and reimbursements in account)
@@ -13,6 +13,12 @@ Yann Pellegrini <mail@yann-p.fr>
 
 ## Licence
 GPLv3
+
+## Database
+
+see `tables.sql` to setup the database.
+
+![schema](tables.png)
 
 ## Dependencies
 
