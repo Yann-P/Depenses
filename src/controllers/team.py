@@ -84,7 +84,6 @@ def remove_user(tid, uid):
 	users = team.get_users()
 	if len(users) > 1:
 		team.remove_user(uid)
-		return redirect(url_for('team.index', tid=tid))
 	return redirect(url_for('team.index', tid=tid))
 
 
@@ -93,9 +92,7 @@ def remove_user(tid, uid):
 def add():
 	name 		= request.form.get('name')
 	description = request.form.get('description')
-	if(Team.exists(name)):
-		return redirect(url_for('dashboard.teams'), error_team_exists=True)
-
-	team = Team.insert(name=name, description=description)
-	team.add_user(g.user.id)
+	if name and not Team.exists(name):
+		team = Team.insert(name=name, description=description)
+		team.add_user(g.user.id)
 	return redirect(url_for('dashboard.teams'))

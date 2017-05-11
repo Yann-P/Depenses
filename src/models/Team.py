@@ -95,4 +95,4 @@ class Team:
 
 	@staticmethod
 	def exists(name):
-		return 0 != num_rows("SELECT id FROM user WHERE name=%s", (name,))
+		return 0 != num_rows("SELECT id FROM team WHERE name=%s", (name,))
