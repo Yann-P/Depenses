@@ -1,15 +1,15 @@
 {% extends "template.html" %}
 
 {% block body %}
-<h1>Groupe "{{ team.name }}"</h1>
+<h1>{{ _('Groupe') }} "{{ team.name }}"</h1>
 
 
-<h2>Nouvelle dépense en commun</h2>
+<h2>{{ _('Nouvelle dépense en commun') }}</h2>
 <form class="pure-form pure-form-stacked" method="post" action="{{ url_for('team.add_expenditure', tid=team.id) }}">
 
 	<div class="pure-g">
 		<div class="pure-u-1 pure-u-md-1-3">
-			<label>Qui a payé</label>
+			<label>{{ _('Qui a payé') }}</label>
 			<select name="who_paid" class="pure-u-23-24">
 				{% for user in team.get_users() %}
 					<option value="{{ user.id }}">{{ user.name }}</option>
@@ -18,40 +18,40 @@
 		</div>
 
 		<div class="pure-u-1 pure-u-md-1-3">
-			<label>Acheté quoi ?</label>
-			<input type="text" name="title" placeholder="ex. courses Carrefour" class="pure-u-23-24"> 
+			<label>{{ _('Acheté quoi ?') }}</label>
+			<input type="text" name="title" placeholder="{{ _('ex. courses Carrefour') }}" class="pure-u-23-24"> 
 
 		</div>
 
 		<div class="pure-u-1 pure-u-md-1-3">
-			<label>Montant (€)</label>
+			<label>{{ _('Montant') }} (€)</label>
 			<input type="number" step="0.01" name="amount"  class="pure-u-23-24">
 		</div>
 
 		<div class="pure-u-1 pure-u-md-1-3">
-			<label>Commentaire</label>
-			<input type="text" name="comment" placeholder="(facultatif)" class="pure-u-23-24">
+			<label>{{ _('Commentaire') }}</label>
+			<input type="text" name="comment" placeholder="({{ _('facultatif') }})" class="pure-u-23-24">
 		</div>
 
 		<div class="pure-u-1 pure-u-md-1-3">
 			<label>&nbsp;</label>
-			<input type="submit" value="Ajouter" class="pure-button pure-button-primary">
+			<input type="submit" value="{{ _('Ajouter') }}" class="pure-button pure-button-primary">
 		</div>
 	</div>
 </form>
 
 <br>
 
-<h2>Dépenses en commun</h2>
+<h2>{{ _('Dépenses en commun') }}</h2>
 <div class="responsive-table-container">
 	<table class="pure-table" id="expenditures">
 		<thead>
 			<tr>
-				<th>Date</th>
-				<th>Qui a payé</th>
-				<th>Intitulé</th>
-				<th>Montant</th>
-				<th>Commentaire</th>
+				<th>{{ _('Date') }}</th>
+				<th>{{ _('Qui a payé') }}</th>
+				<th>{{ _('Intitulé') }}</th>
+				<th>{{ _('Montant') }}</th>
+				<th>{{ _('Commentaire') }}</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -65,7 +65,7 @@
 				<td>{{ expenditure.amount | round(2) }} €</td>
 				<td>{{ expenditure.comment }}</td>
 				<td>
-					<form action="{{ url_for('team.remove_expenditure', tid=team.id) }}" method="post" onsubmit="return confirm('Supprimer cette entrée ?')">
+					<form action="{{ url_for('team.remove_expenditure', tid=team.id) }}" method="post" onsubmit="return confirm(\"{{ _('Supprimer cette entrée ?') }}\")">
 						<input type="hidden" name="eid" value="{{ expenditure.id }}">
 						<button type="submit" class="button-error pure-button">&times;</button>
 					</form>
@@ -82,8 +82,8 @@
 	<table class="pure-table pure-table-bordered">
 		<thead>
 			<tr>
-				<th>Total payé par</th>
-				<th>Montant</th>
+				<th>{{ _('Total payé par') }}</th>
+				<th>{{ _('Montant') }}</th>
 			</tr>
 		</thead>
 
@@ -97,19 +97,28 @@
 		{% endfor %}
 
 		<tr>
-			<td colspan="2" style="text-align: right"><b>Total dépenses groupe : {{ team.get_total_spent() | round(2) }} €</b></td>
+			<td colspan="2" style="text-align: right">
+				<b>
+					{{ _('Total dépenses groupe') }} : 
+					{{ team.get_total_spent() | round(2) }} €</b>
+			</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align: right"><b>Dépense moyenne par personne : {{ team.get_avg_spent() | round(2) }} €</b></td>
+			<td colspan="2" style="text-align: right">
+				<b>
+					{{ _('Dépense moyenne par personne') }} : 
+					{{ team.get_avg_spent() | round(2) }} €
+				</b>
+			</td>
 		</tr>
 
 	</table>
 </div>
 
 
-<h2>Transactions</h2>
+<h2>{{ _('Transactions') }}</h2>
 <em>
-Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions sont prises en considération dans les comptes. <br><br>
+{{ _("Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions sont prises en considération dans les comptes.") }} <br><br>
 </em>
 
 
@@ -118,15 +127,15 @@ Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions s
 
 		<thead>
 			<tr>
-				<th>Date</th>
-				<th>Transaction</th>
-				<th>Montant</th>
-				<th>Commentaire</th>
+				<th>{{ _('Date') }}</th>
+				<th>{{ _('Transaction') }}</th>
+				<th>{{ _('Montant') }}</th>
+				<th>{{ _('Commentaire') }}</th>
 			</tr>
 		</thead>
 
 		{% if team_transactions | length == 0 %}
-			<tr><td colspan="4">Rien à afficher</td></tr>
+			<tr><td colspan="4">{{ _('Rien à afficher') }}</td></tr>
 		{% endif %}
 
 		{% for transaction in team_transactions %}
@@ -146,7 +155,7 @@ Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions s
 
 					<div class="pure-g">
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label>Émetteur</label>
+							<label>{{ _('Émetteur') }}</label>
 							<select name="sender" class="pure-u-23-24">
 								{% for user in team.get_users() %}
 									<option value="{{ user.id }}">{{ user.name }}</option>
@@ -154,11 +163,11 @@ Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions s
 							</select>
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label>Montant (€)</label>
+							<label>{{ _('Montant') }} (€)</label>
 							<input type="number" step="0.01" name="amount"  class="pure-u-23-24">
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label>Bénéficiaire</label>
+							<label>{{ _('Bénéficiaire') }}</label>
 							<select name="recipient" class="pure-u-23-24">
 								{% for user in team.get_users() %}
 									<option value="{{ user.id }}">{{ user.name }}</option>
@@ -166,13 +175,13 @@ Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions s
 							</select>
 						</div>
 						<div class="pure-u-1 pure-u-md-1-5">
-							<label>Commentaire</label>
-							<input type="text" name="comment" placeholder="(facultatif)" class="pure-u-23-24">
+							<label>{{ _('Commentaire') }}</label>
+							<input type="text" name="comment" placeholder="({{ _('facultatif') }})" class="pure-u-23-24">
 						</div>
 
 						<div class="pure-u-1 pure-u-md-1-5">
 							<label>&nbsp;</label>
-							<input type="submit" value="OK" class="pure-button pure-button-primary">
+							<input type="submit" value="{{ _('OK') }}" class="pure-button pure-button-primary">
 						</div>
 					</div>
 				</form>
@@ -189,17 +198,23 @@ Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions s
 	<table class="pure-table">
 		<thead>
 			<tr>
-				<th>Qui doit combien à qui</th>
+				<th>{{ _('Qui doit combien à qui') }}</th>
 			</tr>
 		</thead>
 
 		{% if money_distribution | length == 0 %}
-			<tr><td>Tout est équilibré :)</td></tr>
+			<tr><td>{{ _('Tout est équilibré') }} :)</td></tr>
 		{% endif %}
 
 		{% for transaction in money_distribution %}
 			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-				<td><b>{{ transaction.from }}</b> doit <b>{{ transaction.amount | round(2) }}</b> € à <b>{{ transaction.to }}</b></td> 
+				<td>
+					<b>{{ transaction.from }}</b> 
+					&nbsp;{{ _('doit') }}&nbsp;
+					<b>{{ transaction.amount | round(2) }}</b> € 
+					&nbsp;{{ _('à') }}&nbsp; 
+					<b>{{ transaction.to }}</b>
+				</td> 
 			</tr> 
 		{% endfor %}
 	</table>
@@ -207,14 +222,19 @@ Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les transactions s
 
 <br>
 
-<h2>Membres du groupe</h2>
+<h2>{{ _('Membres du groupe') }}</h2>
 <ul class="users">
 	{% for user in team.get_users() %}
-		<li><div class="user">{{ user.name }} {# <a href="{{ url_for('team.remove_user', tid=team.id, uid=user.id)}}" class="delete-user" onclick="return confirm('Supprimer cet utilisateur du groupe ?')">&times;</a>#}</div> </li>
+		<li>
+			<div class="user">
+				{{ user.name }} 
+				{# <a href="{{ url_for('team.remove_user', tid=team.id, uid=user.id)}}" class="delete-user" onclick="return confirm(\"{{ _('Supprimer cet utilisateur du groupe ?') }}\")">&times;</a>#}
+			</div> 
+		</li>
 	{% endfor %}
 </ul>
 <form class="pure-form" method="post" action="{{ url_for('team.add_user', tid=team.id) }}">
-	<input type="text" required name="user_name" placeholder="Ajouter quelqu'un">
+	<input type="text" required name="user_name" placeholder="{{ _('Ajouter quelqu\'un') }}">
 	<button type="submit" class="pure-button pure-button-primary">+</button>
 </form>
 

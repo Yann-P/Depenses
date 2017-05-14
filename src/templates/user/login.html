@@ -2,19 +2,19 @@
 
 {% block body %}
 
-<h1>Connexion ou inscription</h1>
+<h1>{{ _('Connexion ou inscription') }}</h1>
 <form class="pure-form pure-form-aligned" action="?" method="post">
 
 	<div class="pure-control-group">
 		<label>
 			{% if step2 %}
 				{% if newuser %}
-					Inscription
+					{{ _('Inscription') }}
 				{% else %}
-					Connexion
+					{{ _('Connexion') }}
 				{% endif %}
 			{% else %}
-				Login
+				{{ _('Bienvenue') }}
 			{% endif %}
 		</label>
 		<input {% if not step2 %}autofocus{% endif %} 
@@ -22,29 +22,31 @@
 			value="{% if step2 %}{{ name }}{% endif %}"
 			name="name" 
 			required
-			placeholder="Login">
+			placeholder="{{ _('Identifiant') }}">
 	</div>
 
 	{% if step2 %}
 	<div class="pure-control-group">
 		<label>
 			{% if newuser %}
-				<b>Choisissez</b> un mot de passe
+				<b>{{ _('Choisissez un mot de passe') }}</b>
 			{% else %}
-				<b>Entrez votre mot de passe</b> 
+				<b>{{ _('Entrez votre mot de passe') }}</b> 
 				{% if error %}
-					<div class='error'>Erreur, essayez à nouveau</div>
+					<div class='error'>
+						{{ _('Erreur, essayez à nouveau') }}
+					</div>
 				{% endif %}
 			{% endif %}
 		</label>
-		<input {% if step2 %}autofocus{% endif %} type="password" name="password" placeholder="Password" required>
+		<input {% if step2 %}autofocus{% endif %} type="password" name="password" placeholder="{{ _('Mot de passe') }}" required>
 	</div>
 	{% endif %}
 
 
 	<div class="pure-control-group">
 		<label></label>
-		<input type="submit" value="Suivant &rarr;" class="pure-button pure-button-primary">
+		<input type="submit" value="{{ _('Suivant') }} &rarr;" class="pure-button pure-button-primary">
 	</div>
 </form>
 

@@ -11,6 +11,7 @@
 from datetime import datetime
 from flask import Flask, request, session, url_for, redirect, \
 	 render_template, abort, g
+from flask_babel import Babel
 from controllers.user import user
 from controllers.team import team
 from controllers.dashboard import dashboard
@@ -25,7 +26,17 @@ app.register_blueprint(user, url_prefix='/user')
 app.register_blueprint(team, url_prefix='/team')
 app.register_blueprint(dashboard, url_prefix='/dashboard')
 
-app.secret_key = 'd1\x01O<!\xd5\xa2\xa0\x9fR"'
+###########################################
+app.secret_key = 'PLEASE_CHANGE_ME_!!!!!' # <= CHANGE THIS !!!
+###########################################
+
+babel = Babel(app)
+
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = os.path.join(os.path.dirname(__file__), "../langs/translations")
+
+@babel.localeselector
+def get_locale():
+	return request.accept_languages.best_match(['en', 'fr'])
 
 @app.before_request
 def before_request():
@@ -43,4 +54,4 @@ def index():
 
 
 if __name__ == '__main__':
-	app.run(debug=True) #host='149.91.80.141'
+	app.run(debug=True)

@@ -1,0 +1,306 @@
+# English translations for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-05-14 20:58+0200\n"
+"PO-Revision-Date: 2017-05-14 20:59+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../src/templates/index.html:9
+msgid "Gestion des frais partagés pour une colocation"
+msgstr "Money management for flat sharing"
+
+#: ../src/templates/index.html:12 ../src/templates/template.html:41
+#: ../src/templates/user/login.html:14
+msgid "Connexion"
+msgstr "Log in"
+
+#: ../src/templates/dashboard/index.html:4 ../src/templates/template.html:28
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+#: ../src/templates/dashboard/teams.html:4 ../src/templates/template.html:32
+msgid "Groupes"
+msgstr "Groups"
+
+#: ../src/templates/template.html:57
+msgid "Sous licence GPLv3"
+msgstr "Published under the GPLv3 licence"
+
+#: ../src/templates/template.html:57
+msgid "Code source"
+msgstr "Source code"
+
+#: ../src/templates/template.html:58
+msgid "Créé avec"
+msgstr "Made using"
+
+#: ../src/templates/template.html:58
+msgid "et"
+msgstr "and"
+
+#: ../src/templates/dashboard/index.html:8
+#: ../src/templates/dashboard/teams.html:6
+msgid "Mes groupes"
+msgstr "My Groups"
+
+#: ../src/templates/dashboard/index.html:10
+msgid "voir tout"
+msgstr "see all"
+
+#: ../src/templates/dashboard/index.html:20
+msgid "Mes dépenses (tous groupes confondus)"
+msgstr "My expenditures (all groups)"
+
+#: ../src/templates/dashboard/index.html:25
+#: ../src/templates/dashboard/index.html:62 ../src/templates/team/index.html:4
+msgid "Groupe"
+msgstr "Group"
+
+#: ../src/templates/dashboard/index.html:26
+#: ../src/templates/dashboard/index.html:61
+#: ../src/templates/team/index.html:50 ../src/templates/team/index.html:130
+msgid "Date"
+msgstr "Date"
+
+#: ../src/templates/dashboard/index.html:27
+#: ../src/templates/team/index.html:52
+msgid "Intitulé"
+msgstr "Title"
+
+#: ../src/templates/dashboard/index.html:28
+#: ../src/templates/team/index.html:27 ../src/templates/team/index.html:53
+#: ../src/templates/team/index.html:86 ../src/templates/team/index.html:132
+#: ../src/templates/team/index.html:166
+msgid "Montant"
+msgstr "Amount"
+
+#: ../src/templates/dashboard/index.html:29
+#: ../src/templates/dashboard/index.html:66
+#: ../src/templates/team/index.html:32 ../src/templates/team/index.html:54
+#: ../src/templates/team/index.html:133 ../src/templates/team/index.html:178
+msgid "Commentaire"
+msgstr "Comment"
+
+#: ../src/templates/dashboard/index.html:46
+#: ../src/templates/dashboard/index.html:103
+#: ../src/templates/dashboard/index.html:140
+msgid "Total"
+msgstr "Total"
+
+#: ../src/templates/dashboard/index.html:56
+msgid "Mes transactions (crédits et débits, tous groupes confondus)"
+msgstr "My transactions (incoming and outbound, all groups)"
+
+#: ../src/templates/dashboard/index.html:63
+msgid "Qui"
+msgstr "Who"
+
+#: ../src/templates/dashboard/index.html:64
+#: ../src/templates/dashboard/index.html:123
+msgid "Crédit"
+msgstr "Credit"
+
+#: ../src/templates/dashboard/index.html:65
+#: ../src/templates/dashboard/index.html:124
+msgid "Débit"
+msgstr "Debit"
+
+#: ../src/templates/dashboard/index.html:117
+msgid "Totaux (tous groupes confondus)"
+msgstr "Total (all groups)"
+
+#: ../src/templates/dashboard/index.html:129
+msgid "Dépenses"
+msgstr "Expenditures"
+
+#: ../src/templates/dashboard/index.html:135
+#: ../src/templates/team/index.html:119
+msgid "Transactions"
+msgstr "Transactions"
+
+#: ../src/templates/dashboard/teams.html:10
+msgid "Nom"
+msgstr "Name"
+
+#: ../src/templates/dashboard/teams.html:11
+msgid "Description"
+msgstr "Description"
+
+#: ../src/templates/dashboard/teams.html:12
+msgid "Membres"
+msgstr "Members"
+
+#: ../src/templates/dashboard/teams.html:34
+msgid "Créer un nouveau groupe"
+msgstr "Create a new group"
+
+#: ../src/templates/dashboard/teams.html:36
+msgid ""
+"Vous serez automatiquement ajouté au groupe. Vous pourrez ensuite ajouter "
+"des utilisateurs."
+msgstr ""
+"You will be automatically added to the group. You will be able to add users."
+
+#: ../src/templates/dashboard/teams.html:40
+msgid "Erreur, un groupe avec ce nom existe déjà"
+msgstr "Error, another group exists with this name"
+
+#: ../src/templates/dashboard/teams.html:46
+msgid "Nom du groupe"
+msgstr "Group name"
+
+#: ../src/templates/dashboard/teams.html:50
+msgid "Description du groupe"
+msgstr "Group description"
+
+#: ../src/templates/dashboard/teams.html:51
+#: ../src/templates/team/index.html:33 ../src/templates/team/index.html:179
+msgid "facultatif"
+msgstr "optional"
+
+#: ../src/templates/dashboard/teams.html:56
+msgid "Créer"
+msgstr "Create"
+
+#: ../src/templates/team/index.html:7
+msgid "Nouvelle dépense en commun"
+msgstr "New shared expenditure"
+
+#: ../src/templates/team/index.html:12 ../src/templates/team/index.html:51
+msgid "Qui a payé"
+msgstr "Who paid"
+
+#: ../src/templates/team/index.html:21
+msgid "Acheté quoi ?"
+msgstr "Bought what?"
+
+#: ../src/templates/team/index.html:22
+msgid "ex. courses Carrefour"
+msgstr "e.g. supermarket"
+
+#: ../src/templates/team/index.html:38
+msgid "Ajouter"
+msgstr "Add"
+
+#: ../src/templates/team/index.html:45
+msgid "Dépenses en commun"
+msgstr "Shared expenditures"
+
+#: ../src/templates/team/index.html:68
+msgid "Supprimer cette entrée ?"
+msgstr "Delete?"
+
+#: ../src/templates/team/index.html:85
+msgid "Total payé par"
+msgstr "Total spent by"
+
+#: ../src/templates/team/index.html:102
+msgid "Total dépenses groupe"
+msgstr "Total spent by the group"
+
+#: ../src/templates/team/index.html:109
+msgid "Dépense moyenne par personne"
+msgstr "Average spent per person"
+
+#: ../src/templates/team/index.html:121
+msgid ""
+"Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les "
+"transactions sont prises en considération dans les comptes."
+msgstr ""
+"It can be a reimbursement or borrowing money to a member of the group. The "
+"transactions are taken in account for calculating the balance between the "
+"group members."
+
+#: ../src/templates/team/index.html:131
+msgid "Transaction"
+msgstr "Transaction"
+
+#: ../src/templates/team/index.html:138
+msgid "Rien à afficher"
+msgstr "Nothing to display."
+
+#: ../src/templates/team/index.html:158
+msgid "Émetteur"
+msgstr "Sender"
+
+#: ../src/templates/team/index.html:170
+msgid "Bénéficiaire"
+msgstr "Recipient"
+
+#: ../src/templates/team/index.html:184
+msgid "OK"
+msgstr "O.K."
+
+#: ../src/templates/team/index.html:201
+msgid "Qui doit combien à qui"
+msgstr "Who owes how much money to who"
+
+#: ../src/templates/team/index.html:206
+msgid "Tout est équilibré"
+msgstr "All is balanced"
+
+#: ../src/templates/team/index.html:213
+msgid "doit"
+msgstr "owes"
+
+#: ../src/templates/team/index.html:215
+msgid "à"
+msgstr "to"
+
+#: ../src/templates/team/index.html:225
+msgid "Membres du groupe"
+msgstr "Members of the group"
+
+#: ../src/templates/team/index.html:237
+msgid "Ajouter quelqu'un"
+msgstr "Add an user"
+
+#: ../src/templates/user/login.html:5
+msgid "Connexion ou inscription"
+msgstr "Log in or sign up"
+
+#: ../src/templates/user/login.html:12
+msgid "Inscription"
+msgstr "Sign up"
+
+#: ../src/templates/user/login.html:17
+msgid "Bienvenue"
+msgstr "Welcome"
+
+#: ../src/templates/user/login.html:25
+msgid "Identifiant"
+msgstr "Login"
+
+#: ../src/templates/user/login.html:32
+msgid "Choisissez un mot de passe"
+msgstr "Choose a password"
+
+#: ../src/templates/user/login.html:34
+msgid "Entrez votre mot de passe"
+msgstr "Enter your password"
+
+#: ../src/templates/user/login.html:37
+msgid "Erreur, essayez à nouveau"
+msgstr "Error, try again"
+
+#: ../src/templates/user/login.html:42
+msgid "Mot de passe"
+msgstr "Password"
+
+#: ../src/templates/user/login.html:49
+msgid "Suivant"
+msgstr "Next"

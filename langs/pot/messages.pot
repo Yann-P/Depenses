@@ -1,0 +1,299 @@
+# Translations template for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-05-14 20:58+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: ../src/templates/index.html:9
+msgid "Gestion des frais partagés pour une colocation"
+msgstr ""
+
+#: ../src/templates/index.html:12 ../src/templates/template.html:41
+#: ../src/templates/user/login.html:14
+msgid "Connexion"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:4 ../src/templates/template.html:28
+msgid "Tableau de bord"
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:4 ../src/templates/template.html:32
+msgid "Groupes"
+msgstr ""
+
+#: ../src/templates/template.html:57
+msgid "Sous licence GPLv3"
+msgstr ""
+
+#: ../src/templates/template.html:57
+msgid "Code source"
+msgstr ""
+
+#: ../src/templates/template.html:58
+msgid "Créé avec"
+msgstr ""
+
+#: ../src/templates/template.html:58
+msgid "et"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:8
+#: ../src/templates/dashboard/teams.html:6
+msgid "Mes groupes"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:10
+msgid "voir tout"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:20
+msgid "Mes dépenses (tous groupes confondus)"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:25
+#: ../src/templates/dashboard/index.html:62 ../src/templates/team/index.html:4
+msgid "Groupe"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:26
+#: ../src/templates/dashboard/index.html:61 ../src/templates/team/index.html:50
+#: ../src/templates/team/index.html:130
+msgid "Date"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:27 ../src/templates/team/index.html:52
+msgid "Intitulé"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:28 ../src/templates/team/index.html:27
+#: ../src/templates/team/index.html:53 ../src/templates/team/index.html:86
+#: ../src/templates/team/index.html:132 ../src/templates/team/index.html:166
+msgid "Montant"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:29
+#: ../src/templates/dashboard/index.html:66 ../src/templates/team/index.html:32
+#: ../src/templates/team/index.html:54 ../src/templates/team/index.html:133
+#: ../src/templates/team/index.html:178
+msgid "Commentaire"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:46
+#: ../src/templates/dashboard/index.html:103
+#: ../src/templates/dashboard/index.html:140
+msgid "Total"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:56
+msgid "Mes transactions (crédits et débits, tous groupes confondus)"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:63
+msgid "Qui"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:64
+#: ../src/templates/dashboard/index.html:123
+msgid "Crédit"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:65
+#: ../src/templates/dashboard/index.html:124
+msgid "Débit"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:117
+msgid "Totaux (tous groupes confondus)"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:129
+msgid "Dépenses"
+msgstr ""
+
+#: ../src/templates/dashboard/index.html:135
+#: ../src/templates/team/index.html:119
+msgid "Transactions"
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:10
+msgid "Nom"
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:11
+msgid "Description"
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:12
+msgid "Membres"
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:34
+msgid "Créer un nouveau groupe"
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:36
+msgid ""
+"Vous serez automatiquement ajouté au groupe. Vous pourrez ensuite ajouter"
+" des utilisateurs."
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:40
+msgid "Erreur, un groupe avec ce nom existe déjà"
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:46
+msgid "Nom du groupe"
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:50
+msgid "Description du groupe"
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:51 ../src/templates/team/index.html:33
+#: ../src/templates/team/index.html:179
+msgid "facultatif"
+msgstr ""
+
+#: ../src/templates/dashboard/teams.html:56
+msgid "Créer"
+msgstr ""
+
+#: ../src/templates/team/index.html:7
+msgid "Nouvelle dépense en commun"
+msgstr ""
+
+#: ../src/templates/team/index.html:12 ../src/templates/team/index.html:51
+msgid "Qui a payé"
+msgstr ""
+
+#: ../src/templates/team/index.html:21
+msgid "Acheté quoi ?"
+msgstr ""
+
+#: ../src/templates/team/index.html:22
+msgid "ex. courses Carrefour"
+msgstr ""
+
+#: ../src/templates/team/index.html:38
+msgid "Ajouter"
+msgstr ""
+
+#: ../src/templates/team/index.html:45
+msgid "Dépenses en commun"
+msgstr ""
+
+#: ../src/templates/team/index.html:68
+msgid "Supprimer cette entrée ?"
+msgstr ""
+
+#: ../src/templates/team/index.html:85
+msgid "Total payé par"
+msgstr ""
+
+#: ../src/templates/team/index.html:102
+msgid "Total dépenses groupe"
+msgstr ""
+
+#: ../src/templates/team/index.html:109
+msgid "Dépense moyenne par personne"
+msgstr ""
+
+#: ../src/templates/team/index.html:121
+msgid ""
+"Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les "
+"transactions sont prises en considération dans les comptes."
+msgstr ""
+
+#: ../src/templates/team/index.html:131
+msgid "Transaction"
+msgstr ""
+
+#: ../src/templates/team/index.html:138
+msgid "Rien à afficher"
+msgstr ""
+
+#: ../src/templates/team/index.html:158
+msgid "Émetteur"
+msgstr ""
+
+#: ../src/templates/team/index.html:170
+msgid "Bénéficiaire"
+msgstr ""
+
+#: ../src/templates/team/index.html:184
+msgid "OK"
+msgstr ""
+
+#: ../src/templates/team/index.html:201
+msgid "Qui doit combien à qui"
+msgstr ""
+
+#: ../src/templates/team/index.html:206
+msgid "Tout est équilibré"
+msgstr ""
+
+#: ../src/templates/team/index.html:213
+msgid "doit"
+msgstr ""
+
+#: ../src/templates/team/index.html:215
+msgid "à"
+msgstr ""
+
+#: ../src/templates/team/index.html:225
+msgid "Membres du groupe"
+msgstr ""
+
+#: ../src/templates/team/index.html:237
+msgid "Ajouter quelqu'un"
+msgstr ""
+
+#: ../src/templates/user/login.html:5
+msgid "Connexion ou inscription"
+msgstr ""
+
+#: ../src/templates/user/login.html:12
+msgid "Inscription"
+msgstr ""
+
+#: ../src/templates/user/login.html:17
+msgid "Bienvenue"
+msgstr ""
+
+#: ../src/templates/user/login.html:25
+msgid "Identifiant"
+msgstr ""
+
+#: ../src/templates/user/login.html:32
+msgid "Choisissez un mot de passe"
+msgstr ""
+
+#: ../src/templates/user/login.html:34
+msgid "Entrez votre mot de passe"
+msgstr ""
+
+#: ../src/templates/user/login.html:37
+msgid "Erreur, essayez à nouveau"
+msgstr ""
+
+#: ../src/templates/user/login.html:42
+msgid "Mot de passe"
+msgstr ""
+
+#: ../src/templates/user/login.html:49
+msgid "Suivant"
+msgstr ""
+

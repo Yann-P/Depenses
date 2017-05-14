@@ -1,10 +1,15 @@
 {% extends "template.html" %}
 
 {% block body %}
-<h1>Tableau de bord</h1>
+<h1>{{ _('Tableau de bord') }}</h1>
 
 
-<h2>Mes groupes <a href="{{ url_for('dashboard.teams') }}">(voir tout &rarr;)</a></h2>
+<h2>
+	{{ _('Mes groupes') }}
+	<a href="{{ url_for('dashboard.teams') }}">
+	({{ _('voir tout') }} &rarr;)
+	</a>
+</h2>
 <ul>
 	{% for team in g.user.get_teams() %}
 		<li><a href="{{ url_for('team.index', tid=team.id)}}">{{ team.name }}</a></li>
@@ -12,16 +17,16 @@
 </ul>
 
 
-<h2>Mes dépenses (tous groupes confondus)</h2>
+<h2>{{ _('Mes dépenses (tous groupes confondus)') }}</h2>
 <div class="responsive-table-container">
 	<table class="pure-table pure-table-bordered">
 		<thead>
 			<tr>
-				<th>Groupe</th>
-				<th>Date</th>
-				<th>Intitulé</th>
-				<th>Montant</th>
-				<th>Commentaire</th>
+				<th>{{ _('Groupe') }}</th>
+				<th>{{ _('Date') }}</th>
+				<th>{{ _('Intitulé') }}</th>
+				<th>{{ _('Montant') }}</th>
+				<th>{{ _('Commentaire') }}</th>
 			</tr>
 		</thead>
 
@@ -38,7 +43,7 @@
 		{% endfor %}
 
 		<tr class="balance">
-			<td colspan="3"><b>Total</b></td>
+			<td colspan="3"><b>{{ _('Total') }}</b></td>
 			<td><b class="negative">{{ total_spent | round(2) }} €</b></td>
 			<td></td>
 		</tr>
@@ -48,17 +53,17 @@
 
 <br>
 
-<h2>Mes transactions (crédits et débits, tous groupes confondus)</h2>
+<h2>{{ _('Mes transactions (crédits et débits, tous groupes confondus)') }}</h2>
 <div class="responsive-table-container">
 	<table class="pure-table pure-table-bordered">
 		<thead>
 			<tr>
-				<th>Date</th>
-				<th>Groupe</th>
-				<th>Qui</th>
-				<th>Crédit</th>
-				<th>Débit</th>
-				<th>Commentaire</th>
+				<th>{{ _('Date') }}</th>
+				<th>{{ _('Groupe') }}</th>
+				<th>{{ _('Qui') }}</th>
+				<th>{{ _('Crédit') }}</th>
+				<th>{{ _('Débit') }}</th>
+				<th>{{ _('Commentaire') }}</th>
 			</tr>
 		</thead>
 
@@ -95,7 +100,7 @@
 		</tr>
 
 		<tr class="balance">
-			<td colspan="3">Total</td>
+			<td colspan="3">{{ _('Total') }}</td>
 			<td colspan="2">
 				<b>
 					{{ transactions_balance | round(2) }} €
@@ -109,30 +114,30 @@
 
 <br>
 
-<h2>Totaux (tous groupes confondus)</h2>
+<h2>{{ _('Totaux (tous groupes confondus)') }}</h2>
 <div class="responsive-table-container">
 	<table class="pure-table pure-table-bordered">
 		<thead>
 			<tr>
 				<th></th>
-				<th>Crédit</th>
-				<th>Débit</th>
+				<th>{{ _('Crédit') }}</th>
+				<th>{{ _('Débit') }}</th>
 			</tr>
 		</thead>
 
 		<tr class="balance">
-			<td>Dépenses</td>
+			<td>{{ _('Dépenses') }}</td>
 			<td>&mdash;</td>
 			<td><b class="negative">{{ total_spent | round(2) }} €</b></td>
 		</tr>
 
 		<tr class="balance">
-			<td>Transactions</td>
+			<td>{{ _('Transactions') }}</td>
 			<td><b class="positive">{{ total_received | round(2) }} €</b></td>
 			<td><b class="negative">{{ total_sent | round(2) }} €</b></td>
 		</tr>
 		<tr class="balance">
-			<td>Total</td>
+			<td>{{ _('Total') }}</td>
 			<td colspan="2">
 				<b>
 					{{ balance | round(2) }} €

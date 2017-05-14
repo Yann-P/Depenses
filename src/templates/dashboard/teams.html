@@ -1,15 +1,15 @@
 {% extends "template.html" %}
 
 {% block body %}
-<h1>Groupes</h1>
+<h1>{{ _('Groupes') }}</h1>
 
-<h2>Mes groupes</h2>
+<h2>{{ _('Mes groupes') }}</h2>
 <table class="pure-table responsive-table-container">
 	<thead>
 		<tr>
-			<th>Nom</th>
-			<th>Description</th>
-			<th>Membres</th>
+			<th>{{ _('Nom') }}</th>
+			<th>{{ _('Description') }}</th>
+			<th>{{ _('Membres') }}</th>
 		</tr>
 	</thead>
 
@@ -31,25 +31,29 @@
 
 <br>
 
-<h2>Créer un nouveau groupe</h2>
-<p>Vous serez automatiquement ajouté au groupe. Vous pourrez ensuite ajouter des utilisateurs.</p>
+<h2>{{ _('Créer un nouveau groupe') }}</h2>
+<p>
+	{{ _('Vous serez automatiquement ajouté au groupe. Vous pourrez ensuite ajouter des utilisateurs.') }}
+</p>
 {% if error_team_exists %}
-	<div class="error"><b>Erreur</b>, un groupe avec ce nom existe déjà</div>
+	<div class="error">
+		{{ _('Erreur, un groupe avec ce nom existe déjà') }}
+	</div>
 {% endif %}
 <form class="pure-form pure-form-aligned" action="{{ url_for('team.add') }}" method="post">
 
 	<div class="pure-control-group">
-		<label>Nom du groupe</label>
+		<label>{{ _('Nom du groupe') }}</label>
 		<input type="text" name="name" required>
 	</div>
 	<div class="pure-control-group">
-		<label>Description du groupe</label>
-		<input type="text" name="description" placeholder="(facultatif)">
+		<label>{{ _('Description du groupe') }}</label>
+		<input type="text" name="description" placeholder="({{ _('facultatif') }})">
 	</div>
 
 	<div class="pure-control-group">
 		<label></label>
-		<input type="submit" value="Créer &rarr;" class="pure-button pure-button-primary">
+		<input type="submit" value="{{ _('Créer') }} &rarr;" class="pure-button pure-button-primary">
 	</div>
 </form>
 
