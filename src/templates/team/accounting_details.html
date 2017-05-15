@@ -1,0 +1,64 @@
+{% from 'team/accounting.html' import show_accounting %}
+
+{% extends "template.html" %}
+
+{% block body %}
+<h1>{{ _('Groupe') }} "{{ team.name }}"</h1>
+
+<h2>
+	<a href="{{ url_for('team.index', tid=team.id) }}">
+	(&larr; {{ _('retour') }})
+	</a>
+</h2>
+
+
+<h2>{{ _('Comptes') }}</h2>
+
+{{ show_accounting(money_distribution) }}
+
+<h2>{{ _('Détail des comptes') }}</h2>
+
+{% for user in team.get_users() %}
+
+
+<h3>{{ user.name }}</h3>
+
+{# TODO PUT THIS IN A MACRO. NOT DRY WITH DASHBOARD.INDEX #}
+<div class="responsive-table-container">
+	<table class="pure-table pure-table-bordered">
+		<thead>
+			<tr>
+				<th></th>
+				<th>{{ _('Crédit') }}</th>
+				<th>{{ _('Débit') }}</th>
+			</tr>
+		</thead>
+
+		<tr class="balance">
+			<td>{{ _('Dépenses') }}</td>
+			<td>&mdash;</td>
+			<td><b class="negative">{{ user.get_total_spent(team.id) | round(2) }} €</b></td>
+		</tr>
+
+		<tr class="balance">
+			<td>{{ _('Transactions') }}</td>
+			<td><b class="positive">{{ user.get_total_received(team.id) | round(2) }} €</b></td>
+			<td><b class="negative">{{ user.get_total_sent(team.id) | round(2) }} €</b></td>
+		</tr>
+		<tr class="balance">
+			<td>{{ _('Total') }}</td>
+			<td colspan="2">
+				<b>
+					{{ user.get_balance(team.id) | round(2) }} €
+				</b>
+			</td>
+		</tr>
+
+	</table>
+</div>
+
+{% endfor %}
+
+
+
+{% endblock %}

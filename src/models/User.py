@@ -51,6 +51,9 @@ class User:
 		res = query_fetch_one(sql, params)
 		return res['sum'] or 0
 
+	def get_balance(self, tid=None):
+		return - self.get_total_spent(tid) - self.get_total_sent(tid) + self.get_total_received(tid)
+
 
 	@staticmethod
 	def from_id(id):

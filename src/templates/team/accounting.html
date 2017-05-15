@@ -1,0 +1,27 @@
+{% macro show_accounting(money_distribution): %}
+	<div class="responsive-table-container">
+		<table class="pure-table">
+			<thead>
+				<tr>
+					<th>{{ _('Qui doit combien à qui') }}</th>
+				</tr>
+			</thead>
+
+			{% if money_distribution | length == 0 %}
+				<tr><td>{{ _('Tout est équilibré') }} :)</td></tr>
+			{% endif %}
+
+			{% for transaction in money_distribution %}
+				<tr class="{{ loop.cycle('pure-table-odd', '') }}">
+					<td>
+						<b>{{ transaction.from }}</b> 
+						&nbsp;{{ _('doit') }}&nbsp;
+						<b>{{ transaction.amount | round(2) }}</b> € 
+						&nbsp;{{ _('à') }}&nbsp; 
+						<b>{{ transaction.to }}</b>
+					</td> 
+				</tr> 
+			{% endfor %}
+		</table>
+	</div>
+{% endmacro %}

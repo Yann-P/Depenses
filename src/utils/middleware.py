@@ -17,7 +17,9 @@ def current_user_belongs_to_team(func):
 		json_data = request.get_json()
 		if "tid" in kwargs:
 			team = Team.from_id(kwargs['tid'])
-			if team and not team.contains_user(g.user.id):
+			if not team:
+				return abort(404)
+			if not team.contains_user(g.user.id):
 				return redirect(url_for('user.login'))
 		return func(*args, **kwargs)
 	return wrapper

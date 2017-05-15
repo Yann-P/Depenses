@@ -20,12 +20,20 @@ team = Blueprint('team', __name__, template_folder='templates')
 @current_user_belongs_to_team
 def index(tid):
 	team = Team.from_id(tid)
-	if not team:
-		abort(404)
 	return render_template('team/index.html', 
 		team=team, 
 		team_expenditures=Expenditure.get_for_team(tid),
 		team_transactions=Transaction.get_for_team(tid),
+		money_distribution=team.get_money_distribution())
+
+
+@team.route('/<int:tid>/accounting_details', methods=['get'])
+@require_user
+@current_user_belongs_to_team
+def accounting_details(tid):
+	team = Team.from_id(tid)
+	return render_template('team/accounting_details.html', 
+		team=team,
 		money_distribution=team.get_money_distribution())
 
 
@@ -40,6 +48,7 @@ def add_expenditure(tid):
 	if amount > 0 and title:
 		Expenditure.insert(team_id=tid, user_id=who_paid, amount=amount, title=title, comment=comment)
 	return redirect(url_for('team.index', tid=tid))
+
 
 @team.route('/<int:tid>/add_transaction', methods=['post'])
 @require_user

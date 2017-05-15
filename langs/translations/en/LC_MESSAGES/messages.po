@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-14 20:58+0200\n"
-"PO-Revision-Date: 2017-05-14 20:59+0100\n"
+"POT-Creation-Date: 2017-05-15 21:36+0200\n"
+"PO-Revision-Date: 2017-05-15 21:36+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -66,38 +66,41 @@ msgid "Mes dépenses (tous groupes confondus)"
 msgstr "My expenditures (all groups)"
 
 #: ../src/templates/dashboard/index.html:25
-#: ../src/templates/dashboard/index.html:62 ../src/templates/team/index.html:4
+#: ../src/templates/dashboard/index.html:62
+#: ../src/templates/team/accounting_details.html:6
+#: ../src/templates/team/index.html:5
 msgid "Groupe"
 msgstr "Group"
 
 #: ../src/templates/dashboard/index.html:26
 #: ../src/templates/dashboard/index.html:61
-#: ../src/templates/team/index.html:50 ../src/templates/team/index.html:130
+#: ../src/templates/team/index.html:61 ../src/templates/team/index.html:141
 msgid "Date"
 msgstr "Date"
 
 #: ../src/templates/dashboard/index.html:27
-#: ../src/templates/team/index.html:52
+#: ../src/templates/team/index.html:63
 msgid "Intitulé"
 msgstr "Title"
 
 #: ../src/templates/dashboard/index.html:28
-#: ../src/templates/team/index.html:27 ../src/templates/team/index.html:53
-#: ../src/templates/team/index.html:86 ../src/templates/team/index.html:132
-#: ../src/templates/team/index.html:166
+#: ../src/templates/team/index.html:38 ../src/templates/team/index.html:64
+#: ../src/templates/team/index.html:97 ../src/templates/team/index.html:143
+#: ../src/templates/team/index.html:177
 msgid "Montant"
 msgstr "Amount"
 
 #: ../src/templates/dashboard/index.html:29
 #: ../src/templates/dashboard/index.html:66
-#: ../src/templates/team/index.html:32 ../src/templates/team/index.html:54
-#: ../src/templates/team/index.html:133 ../src/templates/team/index.html:178
+#: ../src/templates/team/index.html:43 ../src/templates/team/index.html:65
+#: ../src/templates/team/index.html:144 ../src/templates/team/index.html:189
 msgid "Commentaire"
 msgstr "Comment"
 
 #: ../src/templates/dashboard/index.html:46
 #: ../src/templates/dashboard/index.html:103
 #: ../src/templates/dashboard/index.html:140
+#: ../src/templates/team/accounting_details.html:48
 msgid "Total"
 msgstr "Total"
 
@@ -111,11 +114,13 @@ msgstr "Who"
 
 #: ../src/templates/dashboard/index.html:64
 #: ../src/templates/dashboard/index.html:123
+#: ../src/templates/team/accounting_details.html:31
 msgid "Crédit"
 msgstr "Credit"
 
 #: ../src/templates/dashboard/index.html:65
 #: ../src/templates/dashboard/index.html:124
+#: ../src/templates/team/accounting_details.html:32
 msgid "Débit"
 msgstr "Debit"
 
@@ -124,11 +129,13 @@ msgid "Totaux (tous groupes confondus)"
 msgstr "Total (all groups)"
 
 #: ../src/templates/dashboard/index.html:129
+#: ../src/templates/team/accounting_details.html:37
 msgid "Dépenses"
 msgstr "Expenditures"
 
 #: ../src/templates/dashboard/index.html:135
-#: ../src/templates/team/index.html:119
+#: ../src/templates/team/accounting_details.html:43
+#: ../src/templates/team/index.html:130
 msgid "Transactions"
 msgstr "Transactions"
 
@@ -168,7 +175,7 @@ msgid "Description du groupe"
 msgstr "Group description"
 
 #: ../src/templates/dashboard/teams.html:51
-#: ../src/templates/team/index.html:33 ../src/templates/team/index.html:179
+#: ../src/templates/team/index.html:44 ../src/templates/team/index.html:190
 msgid "facultatif"
 msgstr "optional"
 
@@ -176,47 +183,80 @@ msgstr "optional"
 msgid "Créer"
 msgstr "Create"
 
-#: ../src/templates/team/index.html:7
+#: ../src/templates/team/accounting.html:6
+msgid "Qui doit combien à qui"
+msgstr "Who owes how much money to who"
+
+#: ../src/templates/team/accounting.html:11
+msgid "Tout est équilibré"
+msgstr "All is balanced"
+
+#: ../src/templates/team/accounting.html:18
+msgid "doit"
+msgstr "owes"
+
+#: ../src/templates/team/accounting.html:20
+msgid "à"
+msgstr "to"
+
+#: ../src/templates/team/accounting_details.html:10
+msgid "retour"
+msgstr "back"
+
+#: ../src/templates/team/accounting_details.html:15
+#: ../src/templates/team/index.html:8
+msgid "Comptes"
+msgstr "Accounting"
+
+#: ../src/templates/team/accounting_details.html:19
+msgid "Détail des comptes"
+msgstr "Accounting detail"
+
+#: ../src/templates/team/index.html:10
+msgid "comptes détaillés"
+msgstr "Detailed accouting"
+
+#: ../src/templates/team/index.html:18
 msgid "Nouvelle dépense en commun"
 msgstr "New shared expenditure"
 
-#: ../src/templates/team/index.html:12 ../src/templates/team/index.html:51
+#: ../src/templates/team/index.html:23 ../src/templates/team/index.html:62
 msgid "Qui a payé"
 msgstr "Who paid"
 
-#: ../src/templates/team/index.html:21
+#: ../src/templates/team/index.html:32
 msgid "Acheté quoi ?"
 msgstr "Bought what?"
 
-#: ../src/templates/team/index.html:22
+#: ../src/templates/team/index.html:33
 msgid "ex. courses Carrefour"
 msgstr "e.g. supermarket"
 
-#: ../src/templates/team/index.html:38
+#: ../src/templates/team/index.html:49
 msgid "Ajouter"
 msgstr "Add"
 
-#: ../src/templates/team/index.html:45
+#: ../src/templates/team/index.html:56
 msgid "Dépenses en commun"
 msgstr "Shared expenditures"
 
-#: ../src/templates/team/index.html:68
+#: ../src/templates/team/index.html:79
 msgid "Supprimer cette entrée ?"
 msgstr "Delete?"
 
-#: ../src/templates/team/index.html:85
+#: ../src/templates/team/index.html:96
 msgid "Total payé par"
 msgstr "Total spent by"
 
-#: ../src/templates/team/index.html:102
+#: ../src/templates/team/index.html:113
 msgid "Total dépenses groupe"
 msgstr "Total spent by the group"
 
-#: ../src/templates/team/index.html:109
+#: ../src/templates/team/index.html:120
 msgid "Dépense moyenne par personne"
 msgstr "Average spent per person"
 
-#: ../src/templates/team/index.html:121
+#: ../src/templates/team/index.html:132
 msgid ""
 "Il peut s'agit d'un remboursement, d'une avance d'argent etc. Les "
 "transactions sont prises en considération dans les comptes."
@@ -225,47 +265,31 @@ msgstr ""
 "transactions are taken in account for calculating the balance between the "
 "group members."
 
-#: ../src/templates/team/index.html:131
+#: ../src/templates/team/index.html:142
 msgid "Transaction"
 msgstr "Transaction"
 
-#: ../src/templates/team/index.html:138
+#: ../src/templates/team/index.html:149
 msgid "Rien à afficher"
 msgstr "Nothing to display."
 
-#: ../src/templates/team/index.html:158
+#: ../src/templates/team/index.html:169
 msgid "Émetteur"
 msgstr "Sender"
 
-#: ../src/templates/team/index.html:170
+#: ../src/templates/team/index.html:181
 msgid "Bénéficiaire"
 msgstr "Recipient"
 
-#: ../src/templates/team/index.html:184
+#: ../src/templates/team/index.html:195
 msgid "OK"
 msgstr "O.K."
 
-#: ../src/templates/team/index.html:201
-msgid "Qui doit combien à qui"
-msgstr "Who owes how much money to who"
-
-#: ../src/templates/team/index.html:206
-msgid "Tout est équilibré"
-msgstr "All is balanced"
-
-#: ../src/templates/team/index.html:213
-msgid "doit"
-msgstr "owes"
-
-#: ../src/templates/team/index.html:215
-msgid "à"
-msgstr "to"
-
-#: ../src/templates/team/index.html:225
+#: ../src/templates/team/index.html:209
 msgid "Membres du groupe"
 msgstr "Members of the group"
 
-#: ../src/templates/team/index.html:237
+#: ../src/templates/team/index.html:221
 msgid "Ajouter quelqu'un"
 msgstr "Add an user"
 

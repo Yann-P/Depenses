@@ -1,8 +1,19 @@
+{% from 'team/accounting.html' import show_accounting %}
 {% extends "template.html" %}
 
 {% block body %}
 <h1>{{ _('Groupe') }} "{{ team.name }}"</h1>
 
+<h2>
+	{{ _('Comptes') }}
+	<a href="{{ url_for('team.accounting_details', tid=team.id) }}">
+	({{ _('comptes détaillés') }} &rarr;)
+	</a>
+</h2>
+
+{{ show_accounting(money_distribution) }}
+
+<br>
 
 <h2>{{ _('Nouvelle dépense en commun') }}</h2>
 <form class="pure-form pure-form-stacked" method="post" action="{{ url_for('team.add_expenditure', tid=team.id) }}">
@@ -192,33 +203,6 @@
 	</table>
 </div>
 
-<h2>Comptes</h2>
-
-<div class="responsive-table-container">
-	<table class="pure-table">
-		<thead>
-			<tr>
-				<th>{{ _('Qui doit combien à qui') }}</th>
-			</tr>
-		</thead>
-
-		{% if money_distribution | length == 0 %}
-			<tr><td>{{ _('Tout est équilibré') }} :)</td></tr>
-		{% endif %}
-
-		{% for transaction in money_distribution %}
-			<tr class="{{ loop.cycle('pure-table-odd', '') }}">
-				<td>
-					<b>{{ transaction.from }}</b> 
-					&nbsp;{{ _('doit') }}&nbsp;
-					<b>{{ transaction.amount | round(2) }}</b> € 
-					&nbsp;{{ _('à') }}&nbsp; 
-					<b>{{ transaction.to }}</b>
-				</td> 
-			</tr> 
-		{% endfor %}
-	</table>
-</div>
 
 <br>
 
