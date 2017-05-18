@@ -15,22 +15,13 @@ Yann Pellegrini <mail@yann-p.fr>
 ## Licence
 GPLv3
 
-## Database
-
-see `tables.sql` to setup the database.
-
-![schema](tables.png)
 
 ## Dependencies
 
- - A mysql server
- - Python 3.4 (installed by default on Ubuntu)
+ - Python 3
+ - MySQL
 
-```
-sudo apt-get install mysql-server
-```
-
-## Python dependencies
+Python dependencies :
 
  - flask
  - mysqlclient
@@ -42,14 +33,35 @@ sudo apt-get install python-dev python3-dev
 sudo apt-get install libmysqlclient-dev
 pip3 install flask
 pip3 install flask-babel
-pip3 insall mysqlclient
+pip3 install mysqlclient
 ```
+
+## Database
+
+![schema](tables.png)
+
+You will need to setup the database. First ensure you have mysql installed, or install it :
+
+```
+sudo apt-get install mysql-server
+```
+
+Then create the database and the tables :
+
+```
+mysql -u root -p
+mysql> source tables.sql
+mysql> \q
+```
+
+Finally, edit `src/models/db.py` with the correct credentials.
+
+
 
 ## Running
 
- - Install dependencies.
- - Setup the mysql database by running `tables.sql`
- - Edit `src/models/db.py` with the correct credentials
+ - Install dependencies (see above)
+ - Setup the database (see above)
  - **WARNING : CHANGE THE APPLICATION SECRET KEY IN `app.py`**, otherwise the sessions are not secure.
  - `make run`
 
@@ -62,7 +74,7 @@ File `/etc/apache2/sites-available/depenses.conf`:
 
 ```
 <virtualhost *:80>
-    ServerName vps.yann-p.fr # or localhost
+    ServerName your.domain.com # or localhost
 
     WSGIDaemonProcess webtool user=www-data group=www-data threads=5 home=/var/www/html/depenses
     WSGIScriptAlias /depenses /var/www/html/depenses/app.wsgi
@@ -93,3 +105,4 @@ File `/etc/apache2/sites-available/depenses.conf`:
 ```
 
 Don't forget to `sudo service apache2 reload`.
+
