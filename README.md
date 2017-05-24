@@ -10,7 +10,7 @@ The purpose of this web app is to organize a budget within a group with shared e
  - Translated in English and in French.
 
 ## Author
-Yann Pellegrini <mail@yann-p.fr>
+Yann Pellegrini \<mail ∀τ yann-p • fr\>
 
 ## Licence
 GPLv3
