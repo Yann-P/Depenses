@@ -2,6 +2,8 @@
 
 The purpose of this web app is to organize a budget within a group with shared expenditures.
 
+*Live demo :* http://vps.yann-p.fr/depenses
+
 ## Features
 
  - Keep track of expenditures and reimbursements within groups
