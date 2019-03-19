@@ -8,7 +8,7 @@ The purpose of this web app is to organize a budget within a group with shared e
 
  - Keep track of expenditures and reimbursements within groups
  - Calculates who owns money to who (takes expentidures and reimbursements in account)
- - Very easy to use user system
+ - Very easy to use
  - Translated in English and in French.
 
 ## Author
