@@ -4,6 +4,8 @@ The purpose of this web app is to organize a budget within a group with shared e
 
 *Live demo :* http://s.yann-p.fr:3031
 
+![Demo](screenshot.png)
+
 ## Features
 
  - Keep track of expenditures and reimbursements within groups
