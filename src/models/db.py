@@ -1,14 +1,16 @@
 import MySQLdb
+import os
 from MySQLdb import OperationalError
 
 
 
 def connect():
 
-	db = MySQLdb.connect(host="localhost",
+	db = MySQLdb.connect(os.environ['DBHOST'],
 	    user="root",
-	    passwd="aaaaaa",
+	    passwd=os.environ['DBPW'],
 	    db="depenses",
+            charset="utf8",
 	    autocommit=True)
 	return db
 
